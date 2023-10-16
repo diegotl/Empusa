@@ -1,0 +1,535 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F21D30B2ADADC7300B6A5D9 /* EmpusaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D30A2ADADC7300B6A5D9 /* EmpusaApp.swift */; };
+		3F21D30D2ADADC7300B6A5D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D30C2ADADC7300B6A5D9 /* ContentView.swift */; };
+		3F21D30F2ADADC7400B6A5D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F21D30E2ADADC7400B6A5D9 /* Assets.xcassets */; };
+		3F21D3122ADADC7400B6A5D9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F21D3112ADADC7400B6A5D9 /* Preview Assets.xcassets */; };
+		3F21D31D2ADADC7400B6A5D9 /* EmpusaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */; };
+		3F21D33C2ADD442800B6A5D9 /* EmpusaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */; };
+		3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */; };
+		3F21D3412ADD77E700B6A5D9 /* EmpusaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F21D3402ADD77E700B6A5D9 /* EmpusaKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F21D3192ADADC7400B6A5D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F21D2FF2ADADC7300B6A5D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F21D3062ADADC7300B6A5D9;
+			remoteInfo = SwitchSDTool;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3F21D3072ADADC7300B6A5D9 /* Empusa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Empusa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F21D30A2ADADC7300B6A5D9 /* EmpusaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaApp.swift; sourceTree = "<group>"; };
+		3F21D30C2ADADC7300B6A5D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3F21D30E2ADADC7400B6A5D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F21D3112ADADC7400B6A5D9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3F21D3132ADADC7400B6A5D9 /* Empusa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Empusa.entitlements; sourceTree = "<group>"; };
+		3F21D3182ADADC7400B6A5D9 /* EmpusaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmpusaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaTests.swift; sourceTree = "<group>"; };
+		3F21D3262ADADC7400B6A5D9 /* EmpusaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaUITests.swift; sourceTree = "<group>"; };
+		3F21D3282ADADC7400B6A5D9 /* EmpusaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3F21D3372ADADEBE00B6A5D9 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
+		3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaModel.swift; sourceTree = "<group>"; };
+		3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F21D3042ADADC7300B6A5D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F21D3412ADD77E700B6A5D9 /* EmpusaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F21D3152ADADC7400B6A5D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F21D2FE2ADADC7300B6A5D9 = {
+			isa = PBXGroup;
+			children = (
+				3F21D3362ADADE8B00B6A5D9 /* Packages */,
+				3F21D3092ADADC7300B6A5D9 /* Empusa */,
+				3F21D31B2ADADC7400B6A5D9 /* Empusa Tests */,
+				3F21D3252ADADC7400B6A5D9 /* Empusa UITests */,
+				3F21D3082ADADC7300B6A5D9 /* Products */,
+				3F21D3382ADADED500B6A5D9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3F21D3082ADADC7300B6A5D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D3072ADADC7300B6A5D9 /* Empusa.app */,
+				3F21D3182ADADC7400B6A5D9 /* EmpusaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F21D3092ADADC7300B6A5D9 /* Empusa */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D30A2ADADC7300B6A5D9 /* EmpusaApp.swift */,
+				3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */,
+				3F21D33D2ADD503100B6A5D9 /* UI Components */,
+				3F21D3132ADADC7400B6A5D9 /* Empusa.entitlements */,
+				3F21D3352ADADC8D00B6A5D9 /* Resources */,
+				3F21D30C2ADADC7300B6A5D9 /* ContentView.swift */,
+				3F21D3102ADADC7400B6A5D9 /* Preview Content */,
+			);
+			path = Empusa;
+			sourceTree = "<group>";
+		};
+		3F21D3102ADADC7400B6A5D9 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D3112ADADC7400B6A5D9 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3F21D31B2ADADC7400B6A5D9 /* Empusa Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */,
+			);
+			path = "Empusa Tests";
+			sourceTree = "<group>";
+		};
+		3F21D3252ADADC7400B6A5D9 /* Empusa UITests */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D3262ADADC7400B6A5D9 /* EmpusaUITests.swift */,
+				3F21D3282ADADC7400B6A5D9 /* EmpusaUITestsLaunchTests.swift */,
+			);
+			path = "Empusa UITests";
+			sourceTree = "<group>";
+		};
+		3F21D3352ADADC8D00B6A5D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D30E2ADADC7400B6A5D9 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3F21D3362ADADE8B00B6A5D9 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D3372ADADEBE00B6A5D9 /* Services */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		3F21D3382ADADED500B6A5D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F21D33D2ADD503100B6A5D9 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */,
+			);
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F21D3062ADADC7300B6A5D9 /* Empusa */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F21D32C2ADADC7400B6A5D9 /* Build configuration list for PBXNativeTarget "Empusa" */;
+			buildPhases = (
+				3F21D3032ADADC7300B6A5D9 /* Sources */,
+				3F21D3042ADADC7300B6A5D9 /* Frameworks */,
+				3F21D3052ADADC7300B6A5D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Empusa;
+			packageProductDependencies = (
+				3F21D3402ADD77E700B6A5D9 /* EmpusaKit */,
+			);
+			productName = SwitchSDTool;
+			productReference = 3F21D3072ADADC7300B6A5D9 /* Empusa.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3F21D3172ADADC7400B6A5D9 /* EmpusaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F21D32F2ADADC7400B6A5D9 /* Build configuration list for PBXNativeTarget "EmpusaTests" */;
+			buildPhases = (
+				3F21D3142ADADC7400B6A5D9 /* Sources */,
+				3F21D3152ADADC7400B6A5D9 /* Frameworks */,
+				3F21D3162ADADC7400B6A5D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F21D31A2ADADC7400B6A5D9 /* PBXTargetDependency */,
+			);
+			name = EmpusaTests;
+			productName = SwitchSDToolTests;
+			productReference = 3F21D3182ADADC7400B6A5D9 /* EmpusaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F21D2FF2ADADC7300B6A5D9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					3F21D3062ADADC7300B6A5D9 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					3F21D3172ADADC7400B6A5D9 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 3F21D3062ADADC7300B6A5D9;
+					};
+				};
+			};
+			buildConfigurationList = 3F21D3022ADADC7300B6A5D9 /* Build configuration list for PBXProject "Empusa" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3F21D2FE2ADADC7300B6A5D9;
+			productRefGroup = 3F21D3082ADADC7300B6A5D9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F21D3062ADADC7300B6A5D9 /* Empusa */,
+				3F21D3172ADADC7400B6A5D9 /* EmpusaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F21D3052ADADC7300B6A5D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F21D3122ADADC7400B6A5D9 /* Preview Assets.xcassets in Resources */,
+				3F21D30F2ADADC7400B6A5D9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F21D3162ADADC7400B6A5D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F21D3032ADADC7300B6A5D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F21D30D2ADADC7300B6A5D9 /* ContentView.swift in Sources */,
+				3F21D30B2ADADC7300B6A5D9 /* EmpusaApp.swift in Sources */,
+				3F21D33C2ADD442800B6A5D9 /* EmpusaModel.swift in Sources */,
+				3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F21D3142ADADC7400B6A5D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F21D31D2ADADC7400B6A5D9 /* EmpusaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F21D31A2ADADC7400B6A5D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F21D3062ADADC7300B6A5D9 /* Empusa */;
+			targetProxy = 3F21D3192ADADC7400B6A5D9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3F21D32A2ADADC7400B6A5D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3F21D32B2ADADC7400B6A5D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		3F21D32D2ADADC7400B6A5D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Empusa/Preview Content\"";
+				DEVELOPMENT_TEAM = D97MJ3844Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3F21D32E2ADADC7400B6A5D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Empusa/Preview Content\"";
+				DEVELOPMENT_TEAM = D97MJ3844Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3F21D3302ADADC7400B6A5D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D97MJ3844Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.EmpusaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Empusa.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Empusa";
+			};
+			name = Debug;
+		};
+		3F21D3312ADADC7400B6A5D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D97MJ3844Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.EmpusaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Empusa.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Empusa";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F21D3022ADADC7300B6A5D9 /* Build configuration list for PBXProject "Empusa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F21D32A2ADADC7400B6A5D9 /* Debug */,
+				3F21D32B2ADADC7400B6A5D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F21D32C2ADADC7400B6A5D9 /* Build configuration list for PBXNativeTarget "Empusa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F21D32D2ADADC7400B6A5D9 /* Debug */,
+				3F21D32E2ADADC7400B6A5D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F21D32F2ADADC7400B6A5D9 /* Build configuration list for PBXNativeTarget "EmpusaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F21D3302ADADC7400B6A5D9 /* Debug */,
+				3F21D3312ADADC7400B6A5D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F21D3402ADD77E700B6A5D9 /* EmpusaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EmpusaKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3F21D2FF2ADADC7300B6A5D9 /* Project object */;
+}
