@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3F21D30B2ADADC7300B6A5D9 /* EmpusaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D30A2ADADC7300B6A5D9 /* EmpusaApp.swift */; };
-		3F21D30D2ADADC7300B6A5D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D30C2ADADC7300B6A5D9 /* ContentView.swift */; };
+		3F21D30D2ADADC7300B6A5D9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D30C2ADADC7300B6A5D9 /* MainView.swift */; };
 		3F21D30F2ADADC7400B6A5D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F21D30E2ADADC7400B6A5D9 /* Assets.xcassets */; };
-		3F21D3122ADADC7400B6A5D9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F21D3112ADADC7400B6A5D9 /* Preview Assets.xcassets */; };
 		3F21D31D2ADADC7400B6A5D9 /* EmpusaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */; };
 		3F21D33C2ADD442800B6A5D9 /* EmpusaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */; };
 		3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */; };
 		3F21D3412ADD77E700B6A5D9 /* EmpusaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F21D3402ADD77E700B6A5D9 /* EmpusaKit */; };
+		3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176D2ADDE117000283AE /* DestinationView.swift */; };
+		3F3B17702ADDE16A000283AE /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176F2ADDE16A000283AE /* ResourcesView.swift */; };
+		3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B17712ADDE25D000283AE /* DataProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,17 +32,17 @@
 /* Begin PBXFileReference section */
 		3F21D3072ADADC7300B6A5D9 /* Empusa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Empusa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F21D30A2ADADC7300B6A5D9 /* EmpusaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaApp.swift; sourceTree = "<group>"; };
-		3F21D30C2ADADC7300B6A5D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3F21D30C2ADADC7300B6A5D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3F21D30E2ADADC7400B6A5D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3F21D3112ADADC7400B6A5D9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3F21D3132ADADC7400B6A5D9 /* Empusa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Empusa.entitlements; sourceTree = "<group>"; };
 		3F21D3182ADADC7400B6A5D9 /* EmpusaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmpusaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaTests.swift; sourceTree = "<group>"; };
-		3F21D3262ADADC7400B6A5D9 /* EmpusaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaUITests.swift; sourceTree = "<group>"; };
-		3F21D3282ADADC7400B6A5D9 /* EmpusaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3F21D3372ADADEBE00B6A5D9 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
+		3F21D3372ADADEBE00B6A5D9 /* EmpusaKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = EmpusaKit; sourceTree = "<group>"; };
 		3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaModel.swift; sourceTree = "<group>"; };
 		3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		3F3B176D2ADDE117000283AE /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
+		3F3B176F2ADDE16A000283AE /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
+		3F3B17712ADDE25D000283AE /* DataProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,6 @@
 				3F21D3362ADADE8B00B6A5D9 /* Packages */,
 				3F21D3092ADADC7300B6A5D9 /* Empusa */,
 				3F21D31B2ADADC7400B6A5D9 /* Empusa Tests */,
-				3F21D3252ADADC7400B6A5D9 /* Empusa UITests */,
 				3F21D3082ADADC7300B6A5D9 /* Products */,
 				3F21D3382ADADED500B6A5D9 /* Frameworks */,
 			);
@@ -86,23 +87,13 @@
 		3F21D3092ADADC7300B6A5D9 /* Empusa */ = {
 			isa = PBXGroup;
 			children = (
+				3F21D3132ADADC7400B6A5D9 /* Empusa.entitlements */,
 				3F21D30A2ADADC7300B6A5D9 /* EmpusaApp.swift */,
 				3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */,
 				3F21D33D2ADD503100B6A5D9 /* UI Components */,
-				3F21D3132ADADC7400B6A5D9 /* Empusa.entitlements */,
 				3F21D3352ADADC8D00B6A5D9 /* Resources */,
-				3F21D30C2ADADC7300B6A5D9 /* ContentView.swift */,
-				3F21D3102ADADC7400B6A5D9 /* Preview Content */,
 			);
 			path = Empusa;
-			sourceTree = "<group>";
-		};
-		3F21D3102ADADC7400B6A5D9 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				3F21D3112ADADC7400B6A5D9 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		3F21D31B2ADADC7400B6A5D9 /* Empusa Tests */ = {
@@ -111,15 +102,6 @@
 				3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */,
 			);
 			path = "Empusa Tests";
-			sourceTree = "<group>";
-		};
-		3F21D3252ADADC7400B6A5D9 /* Empusa UITests */ = {
-			isa = PBXGroup;
-			children = (
-				3F21D3262ADADC7400B6A5D9 /* EmpusaUITests.swift */,
-				3F21D3282ADADC7400B6A5D9 /* EmpusaUITestsLaunchTests.swift */,
-			);
-			path = "Empusa UITests";
 			sourceTree = "<group>";
 		};
 		3F21D3352ADADC8D00B6A5D9 /* Resources */ = {
@@ -133,7 +115,7 @@
 		3F21D3362ADADE8B00B6A5D9 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				3F21D3372ADADEBE00B6A5D9 /* Services */,
+				3F21D3372ADADEBE00B6A5D9 /* EmpusaKit */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -148,7 +130,11 @@
 		3F21D33D2ADD503100B6A5D9 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				3F21D30C2ADADC7300B6A5D9 /* MainView.swift */,
 				3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */,
+				3F3B176D2ADDE117000283AE /* DestinationView.swift */,
+				3F3B176F2ADDE16A000283AE /* ResourcesView.swift */,
+				3F3B17712ADDE25D000283AE /* DataProgressView.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -237,7 +223,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F21D3122ADADC7400B6A5D9 /* Preview Assets.xcassets in Resources */,
 				3F21D30F2ADADC7400B6A5D9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,8 +241,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F21D30D2ADADC7300B6A5D9 /* ContentView.swift in Sources */,
+				3F3B17702ADDE16A000283AE /* ResourcesView.swift in Sources */,
+				3F21D30D2ADADC7300B6A5D9 /* MainView.swift in Sources */,
+				3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */,
 				3F21D30B2ADADC7300B6A5D9 /* EmpusaApp.swift in Sources */,
+				3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */,
 				3F21D33C2ADD442800B6A5D9 /* EmpusaModel.swift in Sources */,
 				3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */,
 			);
@@ -409,16 +397,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Empusa/Preview Content\"";
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "εmpusa";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -436,16 +426,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Empusa/Preview Content\"";
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "εmpusa";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";

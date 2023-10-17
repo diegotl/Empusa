@@ -4,11 +4,11 @@ import SwiftUI
 struct EmpusaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(
+            MainView(
                 model: EmpusaModel()
             )
-//            .frame(width: 680, height: 500)
+            .frame(width: 680, height: 400)
         }
-        .windowResizability(.contentMinSize)
+        .windowResizability(.contentSize)
     }
 }

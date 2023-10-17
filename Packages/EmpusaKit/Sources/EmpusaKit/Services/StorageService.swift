@@ -8,6 +8,7 @@ public protocol StorageServiceProtocol {
     func saveFile(data: Data, fileName: String) async throws -> URL
     func unzipFile(at location: URL, progressSubject: CurrentValueSubject<Double, Never>) throws -> URL
     func removeItem(at path: URL)
+    func zipDirectory(at location: URL, progressSubject: CurrentValueSubject<Double, Never>) throws -> ZipFile
 }
 
 final public class StorageService: StorageServiceProtocol {
@@ -88,5 +89,33 @@ final public class StorageService: StorageServiceProtocol {
         } catch {
             logger.error("StorageService: \(error.localizedDescription)")
         }
+    }
+
+    public func zipDirectory(
+        at location: URL,
+        progressSubject: CurrentValueSubject<Double, Never>
+    ) throws -> ZipFile {
+        let paths = try fileManager
+            .contentsOfDirectory(
+                at: location,
+                includingPropertiesForKeys: nil,
+                options: .skipsHiddenFiles
+            )
+
+        let destinationPath = tempDirectoryPath
+            .appending(component: "backup.zip")
+
+        try Zip.zipFiles(
+            paths: paths,
+            zipFilePath: destinationPath,
+            password: nil,
+            compression: .BestCompression
+        ) { progress in
+            progressSubject.send(progress)
+        }
+
+        return ZipFile(
+            url: destinationPath
+        )
     }
 }
