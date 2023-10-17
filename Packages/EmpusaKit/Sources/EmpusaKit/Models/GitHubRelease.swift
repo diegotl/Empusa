@@ -15,7 +15,7 @@ public struct GitHubReleaseAsset: Identifiable, Decodable {
 public struct GitHubRelease: Identifiable, Decodable {
     public let id: Int
     let name: String
-    let tagName: String
+    public let tagName: String
     let assets: [GitHubReleaseAsset]
 
     enum CodingKeys: String, CodingKey {

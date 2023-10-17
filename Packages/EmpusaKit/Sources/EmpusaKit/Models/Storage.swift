@@ -1,7 +1,7 @@
 import Foundation
 
-public struct ExternalStorage: Identifiable, Hashable {
-    public static let none = ExternalStorage(id: "", name: "None", path: "", capacity: 0)
+public struct ExternalVolume: Identifiable, Hashable {
+    public static let none = ExternalVolume(id: "", name: "None", path: "", capacity: 0)
 
     public let id: String
     public let name: String

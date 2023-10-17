@@ -2,16 +2,9 @@ import Combine
 import Foundation
 
 public protocol ContentManagerProtocol {
-    func download(
-        resources: [SwitchResource],
-        into destination: URL,
-        progressSubject: CurrentValueSubject<ProgressData?, Never>
-    ) async throws
-
-    func backupStorage(
-        at location: URL,
-        progressSubject: CurrentValueSubject<ProgressData?, Never>
-    ) async throws -> ZipFile
+    func download(resources: [SwitchResource], into destination: URL, progressSubject: CurrentValueSubject<ProgressData?, Never>) async throws
+    func backupVolume(at location: URL, progressSubject: CurrentValueSubject<ProgressData?, Never>) async throws -> ZipFile
+    func restoreBackup(at location: URL, to destination: URL, progressSubject: CurrentValueSubject<ProgressData?, Never>) async throws
 }
 
 public final class ContentManager: ContentManagerProtocol {
@@ -84,7 +77,7 @@ public final class ContentManager: ContentManagerProtocol {
         }
     }
 
-    public func backupStorage(
+    public func backupVolume(
         at location: URL,
         progressSubject: CurrentValueSubject<ProgressData?, Never>
     ) async throws -> ZipFile {
@@ -92,7 +85,7 @@ public final class ContentManager: ContentManagerProtocol {
 
         let cancellable = zipProgressSubject.map { zipProgress in
             ProgressData(
-                title: "Zipping storage contents...",
+                title: "Zipping volume contents...",
                 progress: zipProgress,
                 total: 1
             )
@@ -104,5 +97,28 @@ public final class ContentManager: ContentManagerProtocol {
         }
 
         return try storageService.zipDirectory(at: location, progressSubject: zipProgressSubject)
+    }
+
+    public func restoreBackup(
+        at location: URL,
+        to destination: URL,
+        progressSubject: CurrentValueSubject<ProgressData?, Never>
+    ) async throws {
+        let unzipProgressSubject = CurrentValueSubject<Double, Never>(0)
+
+        let cancellable = unzipProgressSubject.map { zipProgress in
+            ProgressData(
+                title: "Restoring backup...",
+                progress: zipProgress,
+                total: 1
+            )
+        }
+        .assign(to: \.value, on: progressSubject)
+
+        defer {
+            cancellable.cancel()
+        }
+
+        try storageService.unzipFile(at: location, to: destination, progressSubject: unzipProgressSubject)
     }
 }

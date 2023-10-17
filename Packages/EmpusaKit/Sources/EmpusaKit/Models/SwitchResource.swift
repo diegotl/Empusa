@@ -1,18 +1,40 @@
 import Foundation
 import Combine
 
-enum SwitchResouceSource {
+// MARK: - DisplayingSwitchResource
+
+public struct DisplayingSwitchResource: Hashable {
+    public let resource: SwitchResource
+    public let version: String?
+
+    public var formattedName: String {
+        if let version {
+            return "\(resource.rawValue.capitalized) \(version)"
+        }
+
+        return resource.rawValue.capitalized
+    }
+
+    public init(resource: SwitchResource, version: String? = nil) {
+        self.resource = resource
+        self.version = version
+    }
+}
+
+// MARK: - SwitchResource
+
+public enum SwitchResouceSource {
     case github(URL, assetPrefix: String)
-    case link(URL)
+    case link(URL, version: String)
 }
 
 public enum SwitchResource: String, CaseIterable {
     case hekate
     case atmosphere
     case sigpatches
-    case tilfoil
+    case tinfoil
 
-    var source: SwitchResouceSource {
+    public var source: SwitchResouceSource {
         switch self {
         case .hekate:
             .github(
@@ -25,9 +47,15 @@ public enum SwitchResource: String, CaseIterable {
                 assetPrefix: "atmosphere-"
             )
         case .sigpatches:
-            .link(.init(string: "https://sigmapatches.coomer.party/sigpatches.zip")!)
-        case .tilfoil:
-            .link(.init(string: "https://tinfoil.media/repo/Tinfoil%20Self%20Installer%20%5B050000BADDAD0000%5D%5B16.0%5D%5Bv2%5D.zip")!)
+            .link(
+                .init(string: "https://sigmapatches.coomer.party/sigpatches.zip")!,
+                version: "16.1.0"
+            )
+        case .tinfoil:
+            .github(
+                .init(string: "https://api.github.com/repos/kkkkyue/Tinfoil/releases/latest")!,
+                assetPrefix: "Tinfoil.Self.Installer"
+            )
         }
     }
 
@@ -39,7 +67,7 @@ public enum SwitchResource: String, CaseIterable {
             "atmosphere.zip"
         case .sigpatches:
             "sigpatches.zip"
-        case .tilfoil:
+        case .tinfoil:
             "tinfoil.zip"
         }
     }
@@ -55,23 +83,18 @@ extension SwitchResource {
         destination: URL,
         progressSubject: CurrentValueSubject<Double, Never>
     ) throws {
-        switch self {
+        let (location, destination) = switch self {
         case .hekate:
-            let contentPaths = try fileManager.contentsOfDirectory(atPath: location.path())
-            guard let bootloaderPath = contentPaths.first(where: { $0 == "bootloader" }) else { return }
+            (location.appending(path: "bootloader"), destination.appending(path: "bootloader"))
 
-            fileManager.merge(
-                atPath: location.appending(path: bootloaderPath).path(),
-                toPath: destination.appending(path: bootloaderPath).path(),
-                progressSubject: progressSubject
-            )
-
-        case .atmosphere, .sigpatches, .tilfoil:
-            fileManager.merge(
-                atPath: location.path(),
-                toPath: destination.path(),
-                progressSubject: progressSubject
-            )
+        case .atmosphere, .sigpatches, .tinfoil:
+            (location, destination)
         }
+
+        fileManager.merge(
+            atPath: location.path(),
+            toPath: destination.path(),
+            progressSubject: progressSubject
+        )
     }
 }

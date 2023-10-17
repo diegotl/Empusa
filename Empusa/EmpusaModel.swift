@@ -10,68 +10,92 @@ struct AlertData {
         title = "Error"
         message = error.localizedDescription
     }
+
+    init(title: String, message: String) {
+        self.title = title
+        self.message = message
+    }
 }
 
 @MainActor
 final class EmpusaModel: ObservableObject {
     // MARK: - Public variables
-    @Published var externalStorages: [ExternalStorage] = []
-    @Published var selectedExternalStorage: ExternalStorage = .none
+    @Published var externalVolumes: [ExternalVolume] = []
+    @Published var selectedVolume: ExternalVolume = .none
 
-    @Published var availableResources: [SwitchResource] = SwitchResource.allCases
+    @Published var isLoadingResources: Bool = false
+    @Published var availableResources: [DisplayingSwitchResource] = []
     @Published var selectedResources: [SwitchResource] = SwitchResource.allCases
 
+    @Published var isImporting: Bool = false
     @Published var isExporting: Bool = false
     @Published var exportingFile: ZipFile?
 
     @Published var isProcessing: Bool = false
     @Published var progress: ProgressData?
 
-    @Published var isShowingAlert: Bool = false
+    @Published var isPresentingAlert: Bool = false
     @Published var alertData: AlertData? {
         didSet {
-            isShowingAlert = alertData != nil
+            isPresentingAlert = alertData != nil
         }
     }
 
-    var canStartProcess: Bool {
-        selectedExternalStorage != .none && !selectedResources.isEmpty && !isProcessing && !isExporting
+    var validVolumeSelected: Bool {
+        selectedVolume != .none
     }
 
-    lazy var backupCompletion: ((Result<URL, Error>) -> Void) = { [weak self] result in
+    var canStartProcess: Bool {
+        validVolumeSelected && !selectedResources.isEmpty && !isProcessing && !isExporting
+    }
+
+    lazy var exportCompletion: ((Result<URL, Error>) -> Void) = { [weak self] result in
+        if let tempZipFilePath = self?.exportingFile?.url {
+            self?.storageService.removeItem(at: tempZipFilePath)
+        }
+
         self?.exportingFile = nil
         self?.isExporting = false
     }
 
+    lazy var importCompletion: ((Result<URL, Error>) -> Void) = { [weak self] result in
+        switch result {
+        case .success(let zipUrl):
+            self?.restoreBackup(zipUrl: zipUrl)
+        case .failure(let error):
+            self?.alertData = .init(error: error)
+        }
+    }
+
     // MARK: - Dependencies
     private let storageService: StorageServiceProtocol = StorageService()
-    let contentManager: ContentManagerProtocol = ContentManager()
-
+    private let assetService: AssetServiceProtocol = AssetService()
+    private let contentManager: ContentManagerProtocol = ContentManager()
     private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa", category: "EmpusaModel")
 
     // MARK: - Init
     init() {
-        loadExternalStorages()
+        loadExternalVolumes()
+        loadResourcesVersions()
     }
 
     // MARK: - Public functions
-    func loadExternalStorages() {
+    func loadExternalVolumes() {
         do {
-            let externalStorages = try storageService.listStorages()
-            self.externalStorages = externalStorages
+            externalVolumes = try storageService.listExternalVolumes()
 
-            if selectedExternalStorage == .none || !externalStorages.contains(selectedExternalStorage) {
-                selectedExternalStorage = externalStorages.last ?? .none
+            if selectedVolume == .none || !externalVolumes.contains(selectedVolume) {
+                selectedVolume = externalVolumes.last ?? .none
             }
         } catch {
-            logger.error("Failed to load external storages: \(error.localizedDescription)")
-            selectedExternalStorage = .none
+            logger.error("Failed to load external volumes: \(error.localizedDescription)")
+            selectedVolume = .none
             alertData = .init(error: error)
         }
     }
 
     func execute() {
-        guard selectedExternalStorage != .none else { return }
+        guard validVolumeSelected else { return }
 
         Task(priority: .background) { [weak self] in
             guard let self else { return }
@@ -85,7 +109,7 @@ final class EmpusaModel: ObservableObject {
             do {
                 try await contentManager.download(
                     resources: selectedResources,
-                    into: selectedExternalStorage.url,
+                    into: selectedVolume.url,
                     progressSubject: progressSubject
                 )
             } catch {
@@ -98,7 +122,32 @@ final class EmpusaModel: ObservableObject {
     }
 
     func backup() {
-        guard selectedExternalStorage != .none else { return }
+        guard validVolumeSelected else { return }
+
+        Task(priority: .background) { [weak self] in
+            guard let self else { return }
+            isProcessing = true
+
+            let progressSubject = CurrentValueSubject<ProgressData?, Never>(nil)
+            progressSubject
+                .receive(on: RunLoop.main)
+                .assign(to: &$progress)
+
+            let zipFile = try await contentManager.backupVolume(
+                at: selectedVolume.url,
+                progressSubject: progressSubject
+            )
+
+            isProcessing = false
+            exportingFile = zipFile
+            isExporting = true
+            self.progress = nil
+        }
+    }
+
+    func restoreBackup(zipUrl: URL) {
+        guard validVolumeSelected else { return }
+        isProcessing = true
 
         Task(priority: .background) { [weak self] in
             guard let self else { return }
@@ -108,20 +157,52 @@ final class EmpusaModel: ObservableObject {
                 .receive(on: RunLoop.main)
                 .assign(to: &$progress)
 
-            let zipFile = try await contentManager.backupStorage(
-                at: selectedExternalStorage.url,
-                progressSubject: progressSubject
-            )
+            try await contentManager
+                .restoreBackup(
+                    at: zipUrl,
+                    to: selectedVolume.url,
+                    progressSubject: progressSubject
+                )
 
-            exportingFile = zipFile
-            isExporting = true
+            isProcessing = false
             self.progress = nil
+
+            self.alertData = .init(
+                title: "Success",
+                message: "Backup sucessfully restored to the selected volume"
+            )
         }
     }
 
-    private func report(progressData: ProgressData) {
-        Task { @MainActor in
-            self.progress = progressData
+    func loadResourcesVersions() {
+        Task { [weak self] in
+            guard let self else { return }
+            self.isLoadingResources = true
+
+            var displayingResources = [DisplayingSwitchResource]()
+
+            for resource in SwitchResource.allCases {
+                switch resource.source {
+                case .github(let url, _):
+                    displayingResources.append(
+                        .init(
+                            resource: resource,
+                            version: try? await assetService.fetchGitHubRelease(for: url).tagName
+                        )
+                    )
+
+                case .link(_, let version):
+                    displayingResources.append(
+                        .init(
+                            resource: resource,
+                            version: version
+                        )
+                    )
+                }
+            }
+
+            self.isLoadingResources = false
+            self.availableResources = displayingResources
         }
     }
 }
