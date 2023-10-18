@@ -70,6 +70,7 @@ final class EmpusaModel: ObservableObject {
     // MARK: - Dependencies
     private let storageService: StorageServiceProtocol = StorageService()
     private let assetService: AssetServiceProtocol = AssetService()
+    private let resourceService: ResourceServiceProtocol = ResourceService()
     private let contentManager: ContentManagerProtocol = ContentManager()
     private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa", category: "EmpusaModel")
 
@@ -175,34 +176,10 @@ final class EmpusaModel: ObservableObject {
     }
 
     func loadResourcesVersions() {
-        Task { [weak self] in
-            guard let self else { return }
-            self.isLoadingResources = true
-
-            var displayingResources = [DisplayingSwitchResource]()
-
-            for resource in SwitchResource.allCases {
-                switch resource.source {
-                case .github(let url, _):
-                    displayingResources.append(
-                        .init(
-                            resource: resource,
-                            version: try? await assetService.fetchGitHubRelease(for: url).tagName
-                        )
-                    )
-
-                case .link(_, let version):
-                    displayingResources.append(
-                        .init(
-                            resource: resource,
-                            version: version
-                        )
-                    )
-                }
-            }
-
-            self.isLoadingResources = false
-            self.availableResources = displayingResources
+        Task { [resourceService, weak self] in
+            self?.isLoadingResources = true
+            self?.availableResources = await resourceService.fetchResources()
+            self?.isLoadingResources = false
         }
     }
 }

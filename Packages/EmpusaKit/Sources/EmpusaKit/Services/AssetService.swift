@@ -7,7 +7,7 @@ enum AssetServiceError: Error {
 }
 
 public protocol AssetServiceProtocol {
-    func fetchGitHubRelease(for resourceUrl: URL) async throws -> GitHubRelease
+    func fetchRepositoryRelease(for resourceUrl: URL) async throws -> RepositoryRelease
     func downloadAsset(for resource: SwitchResource, progressSubject: CurrentValueSubject<Double, Never>) async throws -> Data
 }
 
@@ -19,9 +19,9 @@ public final class AssetService: AssetServiceProtocol {
 
     // MARK: - Public functions
 
-    public func fetchGitHubRelease(
+    public func fetchRepositoryRelease(
         for resourceUrl: URL
-    ) async throws -> GitHubRelease {
+    ) async throws -> RepositoryRelease {
         return try await client.request(url: resourceUrl)
     }
 
@@ -30,8 +30,8 @@ public final class AssetService: AssetServiceProtocol {
         progressSubject: CurrentValueSubject<Double, Never>
     ) async throws -> Data {
         switch resource.source {
-        case .github(let url, let assetPrefix):
-            let release = try await fetchGitHubRelease(for: url)
+        case .github(let url, let assetPrefix), .forgejo(let url, let assetPrefix):
+            let release = try await fetchRepositoryRelease(for: url)
             guard let asset = release
                 .assets
                 .first(where: { $0.name.hasPrefix(assetPrefix) })

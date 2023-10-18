@@ -53,12 +53,19 @@ public final class ContentManager: ContentManagerProtocol {
                 fileName: resource.assetFileName
             )
 
-            // Unzip asset
-            progressTitleSubject.send("Unzipping \(resource.assetFileName)...")
-            let extractedPath = try storageService.unzipFile(
-                at: assetFilePath,
-                progressSubject: unzipProgressSubject
-            )
+            let extractedPath = try {
+                if resource.isAssetZipped {
+                    // Unzip asset
+                    progressTitleSubject.send("Unzipping \(resource.assetFileName)...")
+                    return try storageService.unzipFile(
+                        at: assetFilePath,
+                        progressSubject: unzipProgressSubject
+                    )
+                } else {
+                    unzipProgressSubject.send(1)
+                    return assetFilePath
+                }
+            }()
 
             // Copy asset to SD
             progressTitleSubject.send("Copying contents of \(resource.assetFileName) into destination...")

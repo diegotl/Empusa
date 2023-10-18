@@ -1,6 +1,6 @@
 import Foundation
 
-public struct GitHubReleaseAsset: Identifiable, Decodable {
+public struct ReleaseAsset: Identifiable, Decodable {
     public let id: Int
     let name: String
     let browserDownloadUrl: URL
@@ -12,11 +12,11 @@ public struct GitHubReleaseAsset: Identifiable, Decodable {
     }
 }
 
-public struct GitHubRelease: Identifiable, Decodable {
+public struct RepositoryRelease: Identifiable, Decodable {
     public let id: Int
     let name: String
     public let tagName: String
-    let assets: [GitHubReleaseAsset]
+    let assets: [ReleaseAsset]
 
     enum CodingKeys: String, CodingKey {
         case id
