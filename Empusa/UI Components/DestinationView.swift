@@ -7,12 +7,12 @@ struct DestinationView: View {
         GroupBox("Destination") {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
-                    Picker(selection: $model.selectedExternalStorage) {
-                        ForEach(model.externalStorages, id: \.self) { storage in
-                            if storage == .none {
-                                Text(storage.name)
+                    Picker(selection: $model.selectedVolume) {
+                        ForEach(model.externalVolumes, id: \.self) { volume in
+                            if volume == .none {
+                                Text(volume.name)
                             } else {
-                                Text("\(storage.name) (\(storage.formattedCapacity))")
+                                Text("\(volume.name) (\(volume.formattedCapacity))")
                             }
                         }
                     } label: {
@@ -20,7 +20,7 @@ struct DestinationView: View {
                     }
 
                     Button(action: {
-                        model.loadExternalStorages()
+                        model.loadExternalVolumes()
                     }) {
                         Image(systemName: "arrow.triangle.2.circlepath")
                     }
@@ -33,9 +33,12 @@ struct DestinationView: View {
                         model.backup()
                     }
 
-                    Button("Restore SD Card") {}
+                    Button("Restore SD Card") {
+                        model.isImporting = true
+                    }
                 }
                 .frame(maxWidth: .infinity)
+                .disabled(!model.validVolumeSelected)
 
                 Spacer()
             }
@@ -48,7 +51,12 @@ struct DestinationView: View {
             document: model.exportingFile,
             contentType: .zip,
             defaultFilename: "backup.zip",
-            onCompletion: model.backupCompletion
+            onCompletion: model.exportCompletion
+        )
+        .fileImporter(
+            isPresented: $model.isImporting,
+            allowedContentTypes: [.zip],
+            onCompletion: model.importCompletion
         )
     }
 }

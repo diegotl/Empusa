@@ -20,6 +20,38 @@ extension FileManager {
         case keepDestination
     }
 
+    func moveFile(
+        at location: URL,
+        to destination: URL
+    ) {
+        let fileName = location.lastPathComponent
+        let filedestination = destination.appending(path: fileName)
+
+        do {
+            try createDirectory(
+                at: destination,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
+        } catch {
+            logger.error("Move file error: \(error.localizedDescription)")
+        }
+
+        do {
+            try removeItem(at: filedestination)
+            logger.info("File deleted: \(filedestination)")
+        } catch  {}
+
+        do {
+            try moveItem(
+                at: location,
+                to: filedestination
+            )
+        } catch {
+            logger.error("Move file error: \(error.localizedDescription)")
+        }
+    }
+
     func merge(
         atPath: String,
         toPath: String,
@@ -41,7 +73,7 @@ extension FileManager {
                         try createDirectory(atPath: subItemToPath, withIntermediateDirectories: true, attributes: nil)
                         logger.info("Directory created: \(subItemToPath)")
                     }
-                    catch let error {
+                    catch {
                         logger.error("Merge: \(error.localizedDescription)")
                     }
                 }
@@ -50,13 +82,12 @@ extension FileManager {
                 }
             }
             else {
-
                 if isFile(atPath:subItemToPath) && conflictResolution == .keepSource {
                     do {
                         try removeItem(atPath: subItemToPath)
                         logger.info("File deleted: \(subItemToPath)")
                     }
-                    catch let error {
+                    catch {
                         logger.error("Merge: \(error.localizedDescription)")
                     }
                 }
@@ -65,7 +96,7 @@ extension FileManager {
                     try moveItem(atPath: subItemAtPath, toPath: subItemToPath)
                     logger.info("File moved from \(subItemAtPath) to \(subItemToPath)")
                 }
-                catch let error {
+                catch {
                     logger.error("Merge: \(error.localizedDescription)")
                 }
             }

@@ -6,14 +6,12 @@ enum AssetServiceError: Error {
     case assetNotFound
 }
 
-protocol AssetServiceProtocol {
-    func downloadAsset(
-        for resource: SwitchResource,
-        progressSubject: CurrentValueSubject<Double, Never>
-    ) async throws -> Data
+public protocol AssetServiceProtocol {
+    func fetchRepositoryRelease(for resourceUrl: URL) async throws -> RepositoryRelease
+    func downloadAsset(for resource: SwitchResource, progressSubject: CurrentValueSubject<Double, Never>) async throws -> Data
 }
 
-final class AssetService: AssetServiceProtocol {
+public final class AssetService: AssetServiceProtocol {
     private let client: ClientProtocol = Client()
     private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa.Services", category: "AssetService")
 
@@ -21,13 +19,19 @@ final class AssetService: AssetServiceProtocol {
 
     // MARK: - Public functions
 
+    public func fetchRepositoryRelease(
+        for resourceUrl: URL
+    ) async throws -> RepositoryRelease {
+        return try await client.request(url: resourceUrl)
+    }
+
     public func downloadAsset(
         for resource: SwitchResource,
         progressSubject: CurrentValueSubject<Double, Never>
     ) async throws -> Data {
         switch resource.source {
-        case .github(let url, let assetPrefix):
-            let release: GitHubRelease = try await client.request(url: url)
+        case .github(let url, let assetPrefix), .forgejo(let url, let assetPrefix):
+            let release = try await fetchRepositoryRelease(for: url)
             guard let asset = release
                 .assets
                 .first(where: { $0.name.hasPrefix(assetPrefix) })
@@ -42,7 +46,7 @@ final class AssetService: AssetServiceProtocol {
                 progressSubject: progressSubject
             )
 
-        case .link(let url):
+        case .link(let url, _):
             return try await client.downloadFile(
                 url: url,
                 progressSubject: progressSubject

@@ -69,7 +69,7 @@
 			children = (
 				3F21D3362ADADE8B00B6A5D9 /* Packages */,
 				3F21D3092ADADC7300B6A5D9 /* Empusa */,
-				3F21D31B2ADADC7400B6A5D9 /* Empusa Tests */,
+				3F21D31B2ADADC7400B6A5D9 /* Tests */,
 				3F21D3082ADADC7300B6A5D9 /* Products */,
 				3F21D3382ADADED500B6A5D9 /* Frameworks */,
 			);
@@ -96,12 +96,12 @@
 			path = Empusa;
 			sourceTree = "<group>";
 		};
-		3F21D31B2ADADC7400B6A5D9 /* Empusa Tests */ = {
+		3F21D31B2ADADC7400B6A5D9 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */,
 			);
-			path = "Empusa Tests";
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		3F21D3352ADADC8D00B6A5D9 /* Resources */ = {
@@ -396,7 +396,7 @@
 				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -409,7 +409,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -425,7 +425,7 @@
 				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -438,7 +438,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

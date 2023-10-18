@@ -4,9 +4,10 @@ import Zip
 import OSLog
 
 public protocol StorageServiceProtocol {
-    func listStorages() throws -> [ExternalStorage]
+    func listExternalVolumes() throws -> [ExternalVolume]
     func saveFile(data: Data, fileName: String) async throws -> URL
     func unzipFile(at location: URL, progressSubject: CurrentValueSubject<Double, Never>) throws -> URL
+    func unzipFile(at location: URL, to destination: URL, progressSubject: CurrentValueSubject<Double, Never>) throws
     func removeItem(at path: URL)
     func zipDirectory(at location: URL, progressSubject: CurrentValueSubject<Double, Never>) throws -> ZipFile
 }
@@ -18,7 +19,7 @@ final public class StorageService: StorageServiceProtocol {
 
     public init() {}
 
-    public func listStorages() throws -> [ExternalStorage] {
+    public func listExternalVolumes() throws -> [ExternalVolume] {
         try fileManager.contentsOfDirectory(
             at: URL(fileURLWithPath: "/Volumes"),
             includingPropertiesForKeys: nil
@@ -45,7 +46,7 @@ final public class StorageService: StorageServiceProtocol {
                     return nil
                 }
 
-                return ExternalStorage(
+                return ExternalVolume(
                     id: uuid,
                     name: name,
                     path: path,
@@ -81,6 +82,21 @@ final public class StorageService: StorageServiceProtocol {
             }
 
         return destination
+    }
+
+    public func unzipFile(
+        at location: URL,
+        to destination: URL,
+        progressSubject: CurrentValueSubject<Double, Never>
+    ) throws {
+        try Zip.unzipFile(
+            location,
+            destination: destination,
+            overwrite: true,
+            password: nil
+        ) { progress in
+            progressSubject.send(progress)
+        }
     }
 
     public func removeItem(at path: URL) {

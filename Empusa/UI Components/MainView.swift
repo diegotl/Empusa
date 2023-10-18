@@ -30,7 +30,7 @@ struct MainView: View {
 
             Spacer()
         }
-        .alert(isPresented: $model.isShowingAlert, content: {
+        .alert(isPresented: $model.isPresentingAlert, content: {
             .init(
                 title: Text(model.alertData?.title ?? ""),
                 message: Text(model.alertData?.message ?? "")

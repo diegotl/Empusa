@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "FA78FC72-5033-4377-ADAB-D8156BBDB09E",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Empusa.xcodeproj",
+      "identifier" : "3F21D3062ADADC7300B6A5D9",
+      "name" : "Empusa"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Empusa.xcodeproj",
+        "identifier" : "3F21D3172ADADC7400B6A5D9",
+        "name" : "EmpusaTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/EmpusaKit",
+        "identifier" : "EmpusaKitTests",
+        "name" : "EmpusaKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
