@@ -5,10 +5,10 @@ import OSLog
 
 public protocol StorageServiceProtocol {
     func listExternalVolumes() throws -> [ExternalVolume]
-    func saveFile(data: Data, fileName: String) async throws -> URL
     func unzipFile(at location: URL, progressSubject: CurrentValueSubject<Double, Never>) throws -> URL
     func unzipFile(at location: URL, to destination: URL, progressSubject: CurrentValueSubject<Double, Never>) throws
-    func removeItem(at path: URL)
+    func moveItem(at location: URL, to destination: URL) throws
+    func removeItem(at location: URL)
     func zipDirectory(at location: URL, progressSubject: CurrentValueSubject<Double, Never>) throws -> ZipFile
 }
 
@@ -58,12 +58,6 @@ final public class StorageService: StorageServiceProtocol {
         }
     }
 
-    public func saveFile(data: Data, fileName: String) throws -> URL {
-        let destinationPath = tempDirectoryPath.appending(path: fileName)
-        try data.write(to: destinationPath)
-        return destinationPath
-    }
-
     public func unzipFile(
         at location: URL,
         progressSubject: CurrentValueSubject<Double, Never>
@@ -99,9 +93,20 @@ final public class StorageService: StorageServiceProtocol {
         }
     }
 
-    public func removeItem(at path: URL) {
+    public func moveItem(
+        at location: URL,
+        to destination: URL
+    ) throws {
+        try? fileManager.removeItem(at: destination)
+        try fileManager.moveItem(
+            at: location,
+            to: destination
+        )
+    }
+
+    public func removeItem(at location: URL) {
         do {
-            try fileManager.removeItem(at: path)
+            try fileManager.removeItem(at: location)
         } catch {
             logger.error("StorageService: \(error.localizedDescription)")
         }
@@ -133,5 +138,56 @@ final public class StorageService: StorageServiceProtocol {
         return ZipFile(
             url: destinationPath
         )
+    }
+}
+
+// MARK: - SwitchResource extensions
+
+extension SwitchResource {
+    private var fileManager: FileManager {
+        .default
+    }
+
+    func handleAsset(
+        at location: URL,
+        destination: URL,
+        progressSubject: CurrentValueSubject<Double, Never>
+    ) throws {
+        switch self {
+        case .hekate, .bootLogos:
+            fileManager.merge(
+                atPath: location.appending(path: "bootloader").path(),
+                toPath: destination.appending(path: "bootloader").path(),
+                progressSubject: progressSubject
+            )
+
+        case .atmosphere, .sigpatches, .tinfoil:
+            fileManager.merge(
+                atPath: location.path(),
+                toPath: destination.path(),
+                progressSubject: progressSubject
+            )
+
+        case .hekateIPL:
+            fileManager.moveFile(
+                at: location,
+                to: destination.appending(path: "bootloader"),
+                progressSubject: progressSubject
+            )
+
+        case .lockpickRCM, .fusee:
+            fileManager.moveFile(
+                at: location,
+                to: destination.appending(path: "bootloader").appending(path: "payloads"),
+                progressSubject: progressSubject
+            )
+
+        case .hbAppStore:
+            fileManager.moveFile(
+                at: location,
+                to: destination.appending(path: "switch"),
+                progressSubject: progressSubject
+            )
+        }
     }
 }

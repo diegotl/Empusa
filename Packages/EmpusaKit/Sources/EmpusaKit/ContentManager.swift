@@ -42,43 +42,48 @@ public final class ContentManager: ContentManagerProtocol {
 
             // Download asset
             progressTitleSubject.send("Downloading \(resource.assetFileName)...")
-            let asset = try await githubService.downloadAsset(
+            let assetFileTempUrl = try await githubService.downloadAsset(
                 for: resource,
                 progressSubject: downloadProgressSubject
             )
 
-            progressTitleSubject.send("Saving \(resource.assetFileName)...")
-            let assetFilePath = try await storageService.saveFile(
-                data: asset,
-                fileName: resource.assetFileName
+            // Rename asset file
+            let assetFileUrl = assetFileTempUrl
+                .deletingLastPathComponent()
+                .appending(component: resource.assetFileName)
+
+            try storageService.moveItem(
+                at: assetFileTempUrl,
+                to: assetFileUrl
             )
 
-            let extractedPath = try {
+            let extractedUrl = try {
                 if resource.isAssetZipped {
                     // Unzip asset
                     progressTitleSubject.send("Unzipping \(resource.assetFileName)...")
                     return try storageService.unzipFile(
-                        at: assetFilePath,
+                        at: assetFileUrl,
                         progressSubject: unzipProgressSubject
                     )
                 } else {
+                    // Do nothing
                     unzipProgressSubject.send(1)
-                    return assetFilePath
+                    return assetFileUrl
                 }
             }()
 
             // Copy asset to SD
             progressTitleSubject.send("Copying contents of \(resource.assetFileName) into destination...")
             try resource.handleAsset(
-                at: extractedPath,
+                at: extractedUrl,
                 destination: destination,
                 progressSubject: mergeProgressSubject
             )
 
             // Delete downloaded files on disk
             progressTitleSubject.send("Removing temporary files...")
-            storageService.removeItem(at: assetFilePath)
-            storageService.removeItem(at: extractedPath)
+            storageService.removeItem(at: assetFileUrl)
+            storageService.removeItem(at: extractedUrl)
 
             cancellable.cancel()
         }

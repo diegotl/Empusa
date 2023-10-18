@@ -10,11 +10,6 @@ extension FileManager {
         .init(subsystem: "nl.trevisa.diego.Empusa.Services", category: "FileManager")
     }
 
-    enum ActionType {
-        case move
-        case copy
-    }
-
     enum ConflictResolution {
         case keepSource
         case keepDestination
@@ -22,7 +17,8 @@ extension FileManager {
 
     func moveFile(
         at location: URL,
-        to destination: URL
+        to destination: URL,
+        progressSubject: CurrentValueSubject<Double, Never>
     ) {
         let fileName = location.lastPathComponent
         let filedestination = destination.appending(path: fileName)
@@ -50,6 +46,8 @@ extension FileManager {
         } catch {
             logger.error("Move file error: \(error.localizedDescription)")
         }
+
+        progressSubject.send(1)
     }
 
     func merge(

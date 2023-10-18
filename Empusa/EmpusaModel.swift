@@ -113,6 +113,11 @@ final class EmpusaModel: ObservableObject {
                     into: selectedVolume.url,
                     progressSubject: progressSubject
                 )
+
+                self.alertData = .init(
+                    title: "Success",
+                    message: "Selected resources have been downloaded into the selected destination."
+                )
             } catch {
                 alertData = .init(error: error)
             }
@@ -170,7 +175,7 @@ final class EmpusaModel: ObservableObject {
 
             self.alertData = .init(
                 title: "Success",
-                message: "Backup sucessfully restored to the selected volume"
+                message: "Backup sucessfully restored to the selected destination."
             )
         }
     }

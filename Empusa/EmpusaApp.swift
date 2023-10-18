@@ -7,7 +7,7 @@ struct EmpusaApp: App {
             MainView(
                 model: EmpusaModel()
             )
-            .frame(width: 680, height: 400)
+            .frame(width: 680, height: 420)
         }
         .windowResizability(.contentSize)
     }
