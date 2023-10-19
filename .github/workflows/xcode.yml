@@ -2,7 +2,7 @@ name: Xcode - Build and Analyze
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feature/github-actions" ]
   pull_request:
     branches: [ "main" ]
 
