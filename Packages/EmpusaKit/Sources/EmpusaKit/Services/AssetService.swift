@@ -8,7 +8,7 @@ enum AssetServiceError: Error {
 
 public protocol AssetServiceProtocol {
     func fetchRepositoryRelease(for resourceUrl: URL) async throws -> RepositoryRelease
-    func downloadAsset(for resource: SwitchResource, progressSubject: CurrentValueSubject<Double, Never>) async throws -> Data
+    func downloadAsset(for resource: SwitchResource, progressSubject: CurrentValueSubject<Double, Never>) async throws -> URL
 }
 
 public final class AssetService: AssetServiceProtocol {
@@ -28,7 +28,7 @@ public final class AssetService: AssetServiceProtocol {
     public func downloadAsset(
         for resource: SwitchResource,
         progressSubject: CurrentValueSubject<Double, Never>
-    ) async throws -> Data {
+    ) async throws -> URL {
         switch resource.source {
         case .github(let url, let assetPrefix), .forgejo(let url, let assetPrefix):
             let release = try await fetchRepositoryRelease(for: url)

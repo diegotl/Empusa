@@ -17,6 +17,8 @@
 		3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176D2ADDE117000283AE /* DestinationView.swift */; };
 		3F3B17702ADDE16A000283AE /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176F2ADDE16A000283AE /* ResourcesView.swift */; };
 		3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B17712ADDE25D000283AE /* DataProgressView.swift */; };
+		3FCE9D2D2AE0944C00A4E3F5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3FCE9D2C2AE0944C00A4E3F5 /* Sparkle */; };
+		3FCE9D312AE17F5F00A4E3F5 /* CheckForUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		3F3B176D2ADDE117000283AE /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		3F3B176F2ADDE16A000283AE /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		3F3B17712ADDE25D000283AE /* DataProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProgressView.swift; sourceTree = "<group>"; };
+		3FCE9D2E2AE0FE2E00A4E3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F21D3412ADD77E700B6A5D9 /* EmpusaKit in Frameworks */,
+				3FCE9D2D2AE0944C00A4E3F5 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +112,7 @@
 		3F21D3352ADADC8D00B6A5D9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3FCE9D2E2AE0FE2E00A4E3F5 /* Info.plist */,
 				3F21D30E2ADADC7400B6A5D9 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -135,6 +141,7 @@
 				3F3B176D2ADDE117000283AE /* DestinationView.swift */,
 				3F3B176F2ADDE16A000283AE /* ResourcesView.swift */,
 				3F3B17712ADDE25D000283AE /* DataProgressView.swift */,
+				3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -157,6 +164,7 @@
 			name = Empusa;
 			packageProductDependencies = (
 				3F21D3402ADD77E700B6A5D9 /* EmpusaKit */,
+				3FCE9D2C2AE0944C00A4E3F5 /* Sparkle */,
 			);
 			productName = SwitchSDTool;
 			productReference = 3F21D3072ADADC7300B6A5D9 /* Empusa.app */;
@@ -208,6 +216,9 @@
 				Base,
 			);
 			mainGroup = 3F21D2FE2ADADC7300B6A5D9;
+			packageReferences = (
+				3FCE9D2B2AE0944C00A4E3F5 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			productRefGroup = 3F21D3082ADADC7300B6A5D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -243,6 +254,7 @@
 			files = (
 				3F3B17702ADDE16A000283AE /* ResourcesView.swift in Sources */,
 				3F21D30D2ADADC7300B6A5D9 /* MainView.swift in Sources */,
+				3FCE9D312AE17F5F00A4E3F5 /* CheckForUpdatesView.swift in Sources */,
 				3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */,
 				3F21D30B2ADADC7300B6A5D9 /* EmpusaApp.swift in Sources */,
 				3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */,
@@ -396,11 +408,12 @@
 				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Empusa/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "εmpusa";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -409,7 +422,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -425,11 +438,12 @@
 				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Empusa/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "εmpusa";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -438,7 +452,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -516,10 +530,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		3FCE9D2B2AE0944C00A4E3F5 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		3F21D3402ADD77E700B6A5D9 /* EmpusaKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EmpusaKit;
+		};
+		3FCE9D2C2AE0944C00A4E3F5 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FCE9D2B2AE0944C00A4E3F5 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
