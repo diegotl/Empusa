@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SUFeedURL</key>
+	<string>https://empusa.pacotevicio.app/sparkle.xml</string>
+    <key>SUPublicEDKey</key>
+    <string>62os1l9hx8vk8noKLn706G/htYbpMlhOP2TTJQFa66w=</string>
+</dict>
+</plist>
