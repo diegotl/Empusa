@@ -25,8 +25,14 @@ struct ResourcesView: View {
                                     model.selectedResources.remove(at: index)
                                 }
                             })) {
-                                Text(displayingResource.formattedName)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                HStack {
+                                    Text(displayingResource.formattedName)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                                    if let version = displayingResource.version {
+                                        Text(version)
+                                    }
+                                }
                             }
                         }
                     }
@@ -36,6 +42,12 @@ struct ResourcesView: View {
             }
         }
         .disabled(model.isProcessing)
+        .onAppear(perform: {
+            model.loadResourcesVersions()
+        })
+        .onChange(of: model.selectedVolume) { _ in
+            model.loadResourcesVersions()
+        }
     }
 }
 

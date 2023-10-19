@@ -6,16 +6,15 @@ import Combine
 public struct DisplayingSwitchResource: Hashable {
     public let resource: SwitchResource
     public let version: String?
+    public let preChecked: Bool
 
     public var formattedName: String {
-        [resource.displayName, version]
+        [
+            resource.displayName,
+            resource.additionalDescription
+        ]
             .compactMap { $0 }
             .joined(separator: " ")
-    }
-
-    public init(resource: SwitchResource, version: String? = nil) {
-        self.resource = resource
-        self.version = version
     }
 }
 
@@ -27,7 +26,7 @@ public enum SwitchResouceSource {
     case link(URL, version: String?)
 }
 
-public enum SwitchResource: String, CaseIterable {
+public enum SwitchResource: String, Codable, CaseIterable {
     case hekate
     case hekateIPL
     case atmosphere
@@ -71,7 +70,7 @@ public enum SwitchResource: String, CaseIterable {
         case .hekateIPL:
             .link(
                 .init(string: "https://nh-server.github.io/switch-guide/files/emu/hekate_ipl.ini")!,
-                version: "(from NH Switch Guide)"
+                version: nil
             )
         case .atmosphere:
             .github(
@@ -96,7 +95,7 @@ public enum SwitchResource: String, CaseIterable {
         case .bootLogos:
             .link(
                 .init(string: "https://nh-server.github.io/switch-guide/files/bootlogos.zip")!,
-                version: "(from NH Switch Guide)"
+                version: nil
             )
         case .lockpickRCM:
             .forgejo(
@@ -134,12 +133,30 @@ public enum SwitchResource: String, CaseIterable {
         }
     }
 
+    var additionalDescription: String? {
+        switch self {
+        case .hekateIPL, .bootLogos:
+            "(from NH Switch Guide)"
+        default:
+            nil
+        }
+    }
+
     var isAssetZipped: Bool {
         switch self {
         case .hekateIPL, .lockpickRCM, .hbAppStore, .fusee:
             false
         default:
             true
+        }
+    }
+
+    var uncheckedIfInstalled: Bool {
+        switch self {
+        case .hekateIPL, .bootLogos:
+            true
+        default:
+            false
         }
     }
 }

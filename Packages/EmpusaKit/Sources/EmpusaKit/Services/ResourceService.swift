@@ -2,27 +2,34 @@ import Foundation
 import OSLog
 
 public protocol ResourceServiceProtocol {
-    func fetchResources() async -> [DisplayingSwitchResource]
+    func fetchResources(for volume: ExternalVolume) async -> [DisplayingSwitchResource]
 }
 
 public final class ResourceService: ResourceServiceProtocol {
     // MARK: - Dependencies
     private let assetService: AssetServiceProtocol = AssetService()
-    private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa.Services", category: "ResourceService")
+    private let storageService: StorageServiceProtocol = StorageService()
+    private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa.EmpusaKit", category: "ResourceService")
 
     // MARK: - Public functions
     public init() {}
 
-    public func fetchResources() async -> [DisplayingSwitchResource] {
+    public func fetchResources(
+        for volume: ExternalVolume
+    ) async -> [DisplayingSwitchResource] {
         var displayingResources = [DisplayingSwitchResource]()
+        let log = storageService.getLog(at: volume)
 
         for resource in SwitchResource.allCases {
+            let isInstalled = log?.resources.contains(where: { $0.resource == resource }) ?? false
+
             switch resource.source {
             case .github(let url, _), .forgejo(let url, _):
                 displayingResources.append(
                     .init(
                         resource: resource,
-                        version: try? await assetService.fetchRepositoryRelease(for: url).tagName
+                        version: try? await assetService.fetchRepositoryRelease(for: url).tagName,
+                        preChecked: !(resource.uncheckedIfInstalled && isInstalled)
                     )
                 )
 
@@ -30,7 +37,8 @@ public final class ResourceService: ResourceServiceProtocol {
                 displayingResources.append(
                     .init(
                         resource: resource,
-                        version: version
+                        version: version,
+                        preChecked: !(resource.uncheckedIfInstalled && isInstalled)
                     )
                 )
             }
