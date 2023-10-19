@@ -182,6 +182,13 @@ extension SwitchResource {
                 toPath: destination.appending(path: "bootloader").path(),
                 progressSubject: progressSubject
             )
+        
+        case .emummc:
+            fileManager.moveFile(
+                at: location,
+                to: destination.appending(component: "atmosphere").appending(component: "hosts"),
+                progressSubject: progressSubject
+            )
 
         case .atmosphere, .sigpatches, .tinfoil:
             fileManager.merge(
@@ -204,7 +211,7 @@ extension SwitchResource {
                 progressSubject: progressSubject
             )
 
-        case .hbAppStore:
+        case .hbAppStore, .jksv, .ftpd, .nxThemesInstaller, .nxShell, .goldleaf:
             fileManager.moveFile(
                 at: location,
                 to: destination.appending(path: "switch"),
