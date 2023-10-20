@@ -13,13 +13,15 @@ let package = Package(
             targets: ["EmpusaKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/marmelroy/Zip.git", from: "2.1.2")
+        .package(url: "https://github.com/marmelroy/Zip.git", from: "2.1.2"),
+        .package(path: "../EmpusaMacros")
     ],
     targets: [
         .target(
             name: "EmpusaKit",
             dependencies: [
-                .product(name: "Zip", package: "Zip")
+                .product(name: "Zip", package: "Zip"),
+                .product(name: "EmpusaMacros", package: "EmpusaMacros")
             ]
         ),
         .testTarget(
