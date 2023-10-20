@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable
+          xcode-version: latest
       - name: check Xcode version
         run: /usr/bin/xcodebuild -version
       - name: Checkout
