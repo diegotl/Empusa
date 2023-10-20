@@ -20,4 +20,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Build
         run: |
-          xcodebuild clean build analyze -scheme Empusa | xcpretty && exit ${PIPESTATUS[0]}
+          # xcodebuild clean build analyze -scheme Empusa | xcpretty && exit ${PIPESTATUS[0]}
+          xcodebuild clean test -scheme Empusa -destination platform=macOS -showBuildTimingSummary
+
