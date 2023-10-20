@@ -178,8 +178,8 @@ extension SwitchResource {
         switch self {
         case .hekate, .bootLogos:
             fileManager.merge(
-                atPath: location.appending(path: "bootloader").path(),
-                toPath: destination.appending(path: "bootloader").path(),
+                from: location.appending(path: "bootloader"),
+                to: destination.appending(path: "bootloader"),
                 progressSubject: progressSubject
             )
         
@@ -192,8 +192,8 @@ extension SwitchResource {
 
         case .atmosphere, .sigpatches, .tinfoil:
             fileManager.merge(
-                atPath: location.path(),
-                toPath: destination.path(),
+                from: location,
+                to: destination,
                 progressSubject: progressSubject
             )
 

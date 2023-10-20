@@ -51,11 +51,14 @@ extension FileManager {
     }
 
     func merge(
-        atPath: String,
-        toPath: String,
+        from source: URL,
+        to destination: URL,
         conflictResolution: ConflictResolution = .keepSource,
         progressSubject: CurrentValueSubject<Double, Never>
     ) {
+        let atPath = source.path(percentEncoded: false)
+        let toPath = destination.path(percentEncoded: false)
+
         let pathEnumerator = enumerator(atPath: atPath)
 
         let allObjects = (pathEnumerator?.allObjects as? [String]) ?? []

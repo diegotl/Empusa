@@ -21,7 +21,7 @@ public final class ResourceService: ResourceServiceProtocol {
         let log = storageService.getLog(at: volume)
 
         for resource in SwitchResource.allCases {
-            let isInstalled = log?.resources.contains(where: { $0.resource == resource }) ?? false
+            let isInstalled = log?.isResourceInstalled(resource) ?? false
 
             switch resource.source {
             case .github(let url, _), .forgejo(let url, _):

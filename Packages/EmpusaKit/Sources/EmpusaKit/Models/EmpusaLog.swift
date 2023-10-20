@@ -1,7 +1,7 @@
 import Foundation
 
 public struct InstalledResource: Codable {
-    let resource: SwitchResource
+    let name: SwitchResource
     let version: String?
     var updatedAt: Date = Date()
 }
@@ -13,10 +13,14 @@ public final class EmpusaLog: Codable {
         resource: SwitchResource,
         version: String?
     ) {
-        resources.removeAll(where: { $0.resource == resource })
+        resources.removeAll(where: { $0.name == resource })
         resources.append(.init(
-            resource: resource,
+            name: resource,
             version: version
         ))
+    }
+
+    func isResourceInstalled(_ resource: SwitchResource) -> Bool {
+        resources.contains(where: { $0.name == resource })
     }
 }
