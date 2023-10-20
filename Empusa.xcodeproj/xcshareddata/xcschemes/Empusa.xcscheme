@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:Empusa Tests/Empusa.xctestplan"
+            reference = "container:Tests/Empusa.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
