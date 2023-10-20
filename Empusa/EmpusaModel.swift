@@ -77,7 +77,6 @@ final class EmpusaModel: ObservableObject {
     // MARK: - Init
     init() {
         loadExternalVolumes()
-        loadResourcesVersions()
     }
 
     // MARK: - Public functions
@@ -107,23 +106,27 @@ final class EmpusaModel: ObservableObject {
                 .receive(on: RunLoop.main)
                 .assign(to: &$progress)
 
-            do {
-                try await contentManager.download(
-                    resources: selectedResources,
-                    into: selectedVolume.url,
-                    progressSubject: progressSubject
-                )
-
-                self.alertData = .init(
-                    title: "Success",
-                    message: "Selected resources have been downloaded into the selected destination."
-                )
-            } catch {
-                alertData = .init(error: error)
-            }
+            let result = await contentManager.download(
+                resources: selectedResources,
+                into: selectedVolume,
+                progressSubject: progressSubject
+            )
 
             isProcessing = false
             self.progress = nil
+            loadResourcesVersions()
+
+            if !result.failedResources.isEmpty {
+                alertData = .init(
+                    title: "Alert",
+                    message: "Failed to install \(result.failedResourceNames):\n\n\(result.failedResources.last!.error.localizedDescription)"
+                )
+            } else {
+                alertData = .init(
+                    title: "Success",
+                    message: "Selected resources have been downloaded into the selected destination."
+                )
+            }
         }
     }
 
@@ -181,10 +184,18 @@ final class EmpusaModel: ObservableObject {
     }
 
     func loadResourcesVersions() {
-        Task { [resourceService, weak self] in
-            self?.isLoadingResources = true
-            self?.availableResources = await resourceService.fetchResources()
-            self?.isLoadingResources = false
+        Task { [weak self] in
+            guard let self else { return }
+            self.isLoadingResources = true
+
+            self.availableResources = await resourceService
+                .fetchResources(for: self.selectedVolume)
+
+            self.selectedResources = availableResources
+                .filter{ $0.preChecked }
+                .map { $0.resource }
+
+            self.isLoadingResources = false
         }
     }
 }

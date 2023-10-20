@@ -15,7 +15,7 @@ protocol ClientProtocol {
 final class Client: NSObject, ClientProtocol {
     func request<T: Decodable>(url: URL) async throws -> T {
         let request = URLRequest(url: url)
-        let (data, response) = try await URLSession
+        let (data, _) = try await URLSession
             .shared
             .data(for: request)
 
@@ -35,7 +35,7 @@ final class Client: NSObject, ClientProtocol {
             progressSubject.send(1)
         }
 
-        let (localUrl, response) = try await URLSession
+        let (localUrl, _) = try await URLSession
             .shared
             .download(from: url)
 

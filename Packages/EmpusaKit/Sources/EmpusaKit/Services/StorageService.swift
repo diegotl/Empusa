@@ -10,12 +10,15 @@ public protocol StorageServiceProtocol {
     func moveItem(at location: URL, to destination: URL) throws
     func removeItem(at location: URL)
     func zipDirectory(at location: URL, progressSubject: CurrentValueSubject<Double, Never>) throws -> ZipFile
+
+    func getLog(at volume: ExternalVolume) -> EmpusaLog?
+    func saveLog(_ log: EmpusaLog, at volume: ExternalVolume)
 }
 
 final public class StorageService: StorageServiceProtocol {
     private let fileManager = FileManager.default
     private let tempDirectoryPath = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-    private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa.Services", category: "StorageService")
+    private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa.EmpusaKit", category: "StorageService")
 
     public init() {}
 
@@ -67,13 +70,11 @@ final public class StorageService: StorageServiceProtocol {
         let directoryName = fileName.replacingOccurrences(of: ".\(fileExtension)", with: "")
         let destination = tempDirectoryPath.appending(path: directoryName)
 
-        try Zip.unzipFile(
-            location,
-            destination: destination,
-            overwrite: true,
-            password: nil) { unzipProgress in
-                progressSubject.send(unzipProgress)
-            }
+        try unzipFile(
+            at: location,
+            to: destination,
+            progressSubject: progressSubject
+        )
 
         return destination
     }
@@ -139,6 +140,27 @@ final public class StorageService: StorageServiceProtocol {
             url: destinationPath
         )
     }
+
+    public func getLog(at volume: ExternalVolume) -> EmpusaLog? {
+        do {
+            let logUrl = volume.url.appending(component: "empusa.log")
+            let logData = try Data(contentsOf: logUrl)
+            return try JSONDecoder().decode(EmpusaLog.self, from: logData)
+        } catch {
+            logger.error("Could not load log file in volume: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    public func saveLog(_ log: EmpusaLog, at volume: ExternalVolume) {
+        do {
+            let logUrl = volume.url.appending(component: "empusa.log")
+            let logData = try JSONEncoder().encode(log)
+            try logData.write(to: logUrl)
+        } catch {
+            logger.error("Could not save log file in volume: \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: - SwitchResource extensions
@@ -158,6 +180,13 @@ extension SwitchResource {
             fileManager.merge(
                 atPath: location.appending(path: "bootloader").path(),
                 toPath: destination.appending(path: "bootloader").path(),
+                progressSubject: progressSubject
+            )
+        
+        case .emummc:
+            fileManager.moveFile(
+                at: location,
+                to: destination.appending(component: "atmosphere").appending(component: "hosts"),
                 progressSubject: progressSubject
             )
 
@@ -182,7 +211,7 @@ extension SwitchResource {
                 progressSubject: progressSubject
             )
 
-        case .hbAppStore:
+        case .hbAppStore, .jksv, .ftpd, .nxThemesInstaller, .nxShell, .goldleaf:
             fileManager.moveFile(
                 at: location,
                 to: destination.appending(path: "switch"),

@@ -7,7 +7,7 @@ import Combine
 
 extension FileManager {
     private var logger: Logger {
-        .init(subsystem: "nl.trevisa.diego.Empusa.Services", category: "FileManager")
+        .init(subsystem: "nl.trevisa.diego.Empusa.EmpusaKit", category: "FileManager")
     }
 
     enum ConflictResolution {
