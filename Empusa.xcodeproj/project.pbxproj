@@ -45,6 +45,8 @@
 		3F3B176D2ADDE117000283AE /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		3F3B176F2ADDE16A000283AE /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		3F3B17712ADDE25D000283AE /* DataProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProgressView.swift; sourceTree = "<group>"; };
+		3F54EB962AE2553D008A45B0 /* Empusa.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Empusa.xctestplan; sourceTree = "<group>"; };
+		3FC172272AE1D63A00DCBE28 /* EmpusaMacros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = EmpusaMacros; sourceTree = "<group>"; };
 		3FCE9D2E2AE0FE2E00A4E3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 		3F21D31B2ADADC7400B6A5D9 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3F54EB962AE2553D008A45B0 /* Empusa.xctestplan */,
 				3F21D31C2ADADC7400B6A5D9 /* EmpusaTests.swift */,
 			);
 			path = Tests;
@@ -121,6 +124,7 @@
 		3F21D3362ADADE8B00B6A5D9 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				3FC172272AE1D63A00DCBE28 /* EmpusaMacros */,
 				3F21D3372ADADEBE00B6A5D9 /* EmpusaKit */,
 			);
 			path = Packages;
