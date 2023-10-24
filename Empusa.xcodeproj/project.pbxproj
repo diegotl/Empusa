@@ -14,11 +14,13 @@
 		3F21D33C2ADD442800B6A5D9 /* EmpusaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */; };
 		3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */; };
 		3F21D3412ADD77E700B6A5D9 /* EmpusaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F21D3402ADD77E700B6A5D9 /* EmpusaKit */; };
+		3F28069C2AE8264700649951 /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F28069B2AE8264700649951 /* UIApplication+Version.swift */; };
 		3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176D2ADDE117000283AE /* DestinationView.swift */; };
 		3F3B17702ADDE16A000283AE /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176F2ADDE16A000283AE /* ResourcesView.swift */; };
 		3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B17712ADDE25D000283AE /* DataProgressView.swift */; };
 		3FCE9D2D2AE0944C00A4E3F5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3FCE9D2C2AE0944C00A4E3F5 /* Sparkle */; };
 		3FCE9D312AE17F5F00A4E3F5 /* CheckForUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */; };
+		3FFEF7792AE456850084B365 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFEF7782AE456850084B365 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,7 @@
 		3F21D3372ADADEBE00B6A5D9 /* EmpusaKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = EmpusaKit; sourceTree = "<group>"; };
 		3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaModel.swift; sourceTree = "<group>"; };
 		3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		3F28069B2AE8264700649951 /* UIApplication+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
 		3F3B176D2ADDE117000283AE /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		3F3B176F2ADDE16A000283AE /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		3F3B17712ADDE25D000283AE /* DataProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProgressView.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		3FC172272AE1D63A00DCBE28 /* EmpusaMacros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = EmpusaMacros; sourceTree = "<group>"; };
 		3FCE9D2E2AE0FE2E00A4E3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckForUpdatesView.swift; sourceTree = "<group>"; };
+		3FFEF7782AE456850084B365 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 				3F21D3132ADADC7400B6A5D9 /* Empusa.entitlements */,
 				3F21D30A2ADADC7300B6A5D9 /* EmpusaApp.swift */,
 				3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */,
+				3F28069A2AE8263500649951 /* Extensions */,
 				3F21D33D2ADD503100B6A5D9 /* UI Components */,
 				3F21D3352ADADC8D00B6A5D9 /* Resources */,
 			);
@@ -146,8 +151,17 @@
 				3F3B176F2ADDE16A000283AE /* ResourcesView.swift */,
 				3F3B17712ADDE25D000283AE /* DataProgressView.swift */,
 				3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */,
+				3FFEF7782AE456850084B365 /* SettingsView.swift */,
 			);
 			path = "UI Components";
+			sourceTree = "<group>";
+		};
+		3F28069A2AE8263500649951 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F28069B2AE8264700649951 /* UIApplication+Version.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +273,11 @@
 				3F3B17702ADDE16A000283AE /* ResourcesView.swift in Sources */,
 				3F21D30D2ADADC7300B6A5D9 /* MainView.swift in Sources */,
 				3FCE9D312AE17F5F00A4E3F5 /* CheckForUpdatesView.swift in Sources */,
+				3FFEF7792AE456850084B365 /* SettingsView.swift in Sources */,
 				3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */,
 				3F21D30B2ADADC7300B6A5D9 /* EmpusaApp.swift in Sources */,
 				3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */,
+				3F28069C2AE8264700649951 /* UIApplication+Version.swift in Sources */,
 				3F21D33C2ADD442800B6A5D9 /* EmpusaModel.swift in Sources */,
 				3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */,
 			);
@@ -412,7 +428,7 @@
 				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -426,7 +442,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -442,7 +458,7 @@
 				CODE_SIGN_ENTITLEMENTS = Empusa/Empusa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = D97MJ3844Q;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -456,7 +472,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.trevisa.diego.Empusa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

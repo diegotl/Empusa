@@ -1,3 +1,4 @@
+import SwiftUI
 import Combine
 import EmpusaKit
 import OSLog
@@ -41,12 +42,33 @@ final class EmpusaModel: ObservableObject {
         }
     }
 
+    @AppStorage("preferPreReleaseVersions") var preferPreRelease = false {
+        didSet {
+            loadResourcesVersions()
+        }
+    }
+
     var validVolumeSelected: Bool {
         selectedVolume != .none
     }
 
     var canStartProcess: Bool {
         validVolumeSelected && !selectedResources.isEmpty && !isProcessing && !isExporting
+    }
+
+    var isAllSelected: Bool {
+        get {
+            SwitchResource
+                .allCases
+                .allSatisfy { selectedResources.contains($0) }
+        } set {
+            switch newValue {
+            case true:
+                selectedResources = SwitchResource.allCases
+            case false:
+                selectedResources = []
+            }
+        }
     }
 
     lazy var exportCompletion: ((Result<URL, Error>) -> Void) = { [weak self] result in
@@ -189,7 +211,9 @@ final class EmpusaModel: ObservableObject {
             self.isLoadingResources = true
 
             self.availableResources = await resourceService
-                .fetchResources(for: self.selectedVolume)
+                .fetchResources(
+                    for: self.selectedVolume
+                )
 
             self.selectedResources = availableResources
                 .filter{ $0.preChecked }
@@ -197,5 +221,13 @@ final class EmpusaModel: ObservableObject {
 
             self.isLoadingResources = false
         }
+    }
+
+    func selectAll() {
+        selectedResources = SwitchResource.allCases
+    }
+
+    func deselectAll() {
+        selectedResources = []
     }
 }

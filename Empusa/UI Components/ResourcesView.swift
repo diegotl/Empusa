@@ -14,6 +14,11 @@ struct ResourcesView: View {
                     Spacer()
                 } else {
                     List {
+                        Toggle(isOn: $model.isAllSelected) {
+                            Text("Select all")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+
                         ForEach(model.availableResources, id: \.self) { displayingResource in
                             Toggle(isOn: .init(get: {
                                 model.selectedResources.contains(displayingResource.resource)

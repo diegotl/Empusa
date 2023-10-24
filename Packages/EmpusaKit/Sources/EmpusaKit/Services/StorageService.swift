@@ -190,7 +190,7 @@ extension SwitchResource {
                 progressSubject: progressSubject
             )
 
-        case .atmosphere, .sigpatches, .tinfoil:
+        case .atmosphere, .sigpatches, .tinfoil, .awooInstaller, .missionControl, .nxGallery:
             fileManager.merge(
                 from: location,
                 to: destination,
@@ -211,7 +211,7 @@ extension SwitchResource {
                 progressSubject: progressSubject
             )
 
-        case .hbAppStore, .jksv, .ftpd, .nxThemesInstaller, .nxShell, .goldleaf:
+        case .hbAppStore, .jksv, .ftpd, .nxThemesInstaller, .nxShell, .goldleaf, .nxActivityLog:
             fileManager.moveFile(
                 at: location,
                 to: destination.appending(path: "switch"),

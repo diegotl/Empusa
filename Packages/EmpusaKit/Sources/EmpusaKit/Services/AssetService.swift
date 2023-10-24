@@ -7,22 +7,39 @@ enum AssetServiceError: Error {
 }
 
 public protocol AssetServiceProtocol {
-    func fetchRepositoryRelease(for resourceUrl: URL) async throws -> RepositoryRelease
+    func fetchRepositoryReleases(for resource: SwitchResource) async throws -> [RepositoryRelease]
+    func fetchRepositoryRelease(for resource: SwitchResource) async throws -> RepositoryRelease
     func downloadAsset(for resource: SwitchResource, progressSubject: CurrentValueSubject<Double, Never>) async throws -> DownloadedAsset
 }
 
 public final class AssetService: AssetServiceProtocol {
+    // MARK: - Dependencies
+    private let userDefaultsService: UserDefaultsServiceProtocol = UserDefaultsService()
     private let client: ClientProtocol = Client()
     private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa.EmpusaKit", category: "AssetService")
-
+    
+    // MARK: - Init
     public init() {}
 
     // MARK: - Public functions
+    public func fetchRepositoryReleases(
+        for resource: SwitchResource
+    ) async throws -> [RepositoryRelease] {
+        try await client.request(url: resource.source.releasesUrl)
+    }
 
     public func fetchRepositoryRelease(
-        for resourceUrl: URL
+        for resource: SwitchResource
     ) async throws -> RepositoryRelease {
-        return try await client.request(url: resourceUrl)
+        let preferPreReleaseVersions = userDefaultsService.boolForKey(.preferPreReleaseVersions)
+        if preferPreReleaseVersions {
+            let allReleases = try await fetchRepositoryReleases(for: resource)
+            if let latestRelease = allReleases.first, latestRelease.prerelease {
+                return latestRelease
+            }
+        }
+
+        return try await client.request(url: resource.source.latestReleaseUrl)
     }
 
     public func downloadAsset(
@@ -30,8 +47,9 @@ public final class AssetService: AssetServiceProtocol {
         progressSubject: CurrentValueSubject<Double, Never>
     ) async throws -> DownloadedAsset {
         switch resource.source {
-        case .github(let url, let assetPrefix), .forgejo(let url, let assetPrefix):
-            let release = try await fetchRepositoryRelease(for: url)
+        case .github(_, _, let assetPrefix), .forgejo(_, _, let assetPrefix):
+            let release = try await fetchRepositoryRelease(for: resource)
+
             guard let asset = release
                 .assets
                 .first(where: { $0.name.hasPrefix(assetPrefix) })

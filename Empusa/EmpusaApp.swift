@@ -10,10 +10,10 @@ struct EmpusaApp: App {
     )
 
     var body: some Scene {
+        let model: EmpusaModel = .init()
+
         WindowGroup {
-            MainView(
-                model: EmpusaModel()
-            )
+            MainView(model: model)
             .frame(width: 680, height: 420)
         }
         .windowResizability(.contentSize)
@@ -22,6 +22,10 @@ struct EmpusaApp: App {
             CommandGroup(after: .appInfo) {
                 CheckForUpdatesView(updater: updaterController.updater)
             }
+        }
+
+        Settings {
+            SettingsView(model: model)
         }
     }
 }

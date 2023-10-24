@@ -22,9 +22,31 @@ public struct DisplayingSwitchResource: Hashable {
 // MARK: - SwitchResource
 
 public enum SwitchResouceSource {
-    case github(URL, assetPrefix: String)
-    case forgejo(URL, assetPrefix: String)
+    case github(owner: String, repo: String, assetPrefix: String)
+    case forgejo(owner: String, repo: String, assetPrefix: String)
     case link(URL, version: String?)
+
+    public var latestReleaseUrl: URL {
+        switch self {
+        case .github(let owner, let repo, _):
+            URL(string: "https://api.github.com/repos/\(owner)/\(repo)/releases/latest")!
+        case .forgejo(let owner, let repo, _):
+            URL(string: "https://vps.suchmeme.nl/git/api/v1/repos/\(owner)/\(repo)/releases/latest")!
+        case .link(let url, _):
+            url
+        }
+    }
+
+    public var releasesUrl: URL {
+        switch self {
+        case .github(let owner, let repo, _):
+            URL(string: "https://api.github.com/repos/\(owner)/\(repo)/releases")!
+        case .forgejo(let owner, let repo, _):
+            URL(string: "https://vps.suchmeme.nl/git/api/v1/repos/\(owner)/\(repo)/releases")!
+        case .link:
+            fatalError("Direct linked resources don't have releases endpoint")
+        }
+    }
 }
 
 public enum SwitchResource: String, Codable, CaseIterable {
@@ -43,6 +65,10 @@ public enum SwitchResource: String, Codable, CaseIterable {
     case nxThemesInstaller
     case nxShell
     case goldleaf
+    case awooInstaller
+    case missionControl
+    case nxGallery
+    case nxActivityLog
 
     public var displayName: String {
         switch self {
@@ -61,6 +87,10 @@ public enum SwitchResource: String, Codable, CaseIterable {
         case .nxThemesInstaller:    "NXThemesInstaller"
         case .nxShell:              "NX-Shell"
         case .goldleaf:             "Goldleaf"
+        case .awooInstaller:        "Awoo Installer"
+        case .missionControl:       "MissionControl"
+        case .nxGallery:            "NXGallery"
+        case .nxActivityLog:        "NX Activity Log"
         }
     }
 
@@ -68,7 +98,8 @@ public enum SwitchResource: String, Codable, CaseIterable {
         switch self {
         case .hekate:
             .github(
-                #URL("https://api.github.com/repos/CTCaer/hekate/releases/latest"),
+                owner: "CTCaer",
+                repo: "hekate",
                 assetPrefix: "hekate_ctcaer_"
             )
         case .hekateIPL:
@@ -78,12 +109,14 @@ public enum SwitchResource: String, Codable, CaseIterable {
             )
         case .atmosphere:
             .github(
-                #URL("https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest"),
+                owner: "Atmosphere-NX",
+                repo: "Atmosphere",
                 assetPrefix: "atmosphere-"
             )
         case .fusee:
             .github(
-                #URL("https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest"),
+                owner: "Atmosphere-NX",
+                repo: "Atmosphere",
                 assetPrefix: "fusee.bin"
             )
         case .sigpatches:
@@ -93,7 +126,8 @@ public enum SwitchResource: String, Codable, CaseIterable {
             )
         case .tinfoil:
             .github(
-                #URL("https://api.github.com/repos/kkkkyue/Tinfoil/releases/latest"),
+                owner: "kkkkyue",
+                repo: "Tinfoil",
                 assetPrefix: "Tinfoil.Self.Installer"
             )
         case .bootLogos:
@@ -108,38 +142,69 @@ public enum SwitchResource: String, Codable, CaseIterable {
             )
         case .lockpickRCM:
             .forgejo(
-                #URL("https://vps.suchmeme.nl/git/api/v1/repos/mudkip/Lockpick_RCM/releases/latest"),
+                owner: "mudkip",
+                repo: "Lockpick_RCM",
                 assetPrefix: "Lockpick_RCM.bin"
             )
         case .hbAppStore:
             .github(
-                #URL("https://api.github.com/repos/fortheusers/hb-appstore/releases/latest"),
+                owner: "fortheusers",
+                repo: "hb-appstore",
                 assetPrefix: "appstore.nro"
             )
         case .jksv:
             .github(
-                #URL("https://api.github.com/repos/J-D-K/JKSV/releases/latest"),
+                owner: "J-D-K",
+                repo: "JKSV",
                 assetPrefix: "JKSV.nro"
             )
         case .ftpd:
             .github(
-                #URL("https://api.github.com/repos/mtheall/ftpd/releases/latest"),
+                owner: "mtheall",
+                repo: "ftpd",
                 assetPrefix: "ftpd.nro"
             )
         case .nxThemesInstaller:
             .github(
-                #URL("https://api.github.com/repos/exelix11/SwitchThemeInjector/releases/latest"),
+                owner: "exelix11",
+                repo:  "SwitchThemeInjector",
                 assetPrefix: "NXThemesInstaller.nro"
             )
         case .nxShell:
             .github(
-                #URL("https://api.github.com/repos/joel16/NX-Shell/releases/latest"),
+                owner: "joel16",
+                repo: "NX-Shell",
                 assetPrefix: "NX-Shell.nro"
             )
         case .goldleaf:
             .github(
-                #URL("https://api.github.com/repos/XorTroll/Goldleaf/releases/latest"),
+                owner: "XorTroll",
+                repo: "Goldleaf",
                 assetPrefix: "Goldleaf.nro"
+            )
+        case .awooInstaller:
+            .github(
+                owner: "Huntereb",
+                repo: "Awoo-Installer",
+                assetPrefix: "Awoo-Installer.zip"
+            )
+        case .missionControl:
+            .github(
+                owner: "ndeadly",
+                repo: "MissionControl",
+                assetPrefix: "MissionControl-"
+            )
+        case .nxGallery:
+            .github(
+                owner: "iUltimateLP",
+                repo: "NXGallery",
+                assetPrefix: "NXGallery_"
+            )
+        case .nxActivityLog:
+            .github(
+                owner: "tallbl0nde",
+                repo: "NX-Activity-Log",
+                assetPrefix: "NX-Activity-Log.nro"
             )
         }
     }
@@ -161,6 +226,10 @@ public enum SwitchResource: String, Codable, CaseIterable {
         case .nxThemesInstaller:    "NXThemesInstaller.nro"
         case .nxShell:              "NX-Shell.nro"
         case .goldleaf:             "Goldleaf.nro"
+        case .awooInstaller:        "Awoo-Installer.zip"
+        case .missionControl:       "MissionControl.zip"
+        case .nxGallery:            "NXGallery.zip"
+        case .nxActivityLog:        "NX-Activity-Log.nro"
         }
     }
 
@@ -177,7 +246,7 @@ public enum SwitchResource: String, Codable, CaseIterable {
         switch self {
         case .hekateIPL, .emummc, .lockpickRCM, .hbAppStore,
              .fusee, .jksv, .ftpd, .nxThemesInstaller,
-             .nxShell, .goldleaf:
+             .nxShell, .goldleaf, .nxActivityLog:
             false
         default:
             true

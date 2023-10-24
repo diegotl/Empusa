@@ -21,24 +21,42 @@ public final class ResourceService: ResourceServiceProtocol {
         let log = storageService.getLog(at: volume)
 
         for resource in SwitchResource.allCases {
-            let isInstalled = log?.isResourceInstalled(resource) ?? false
+            let isInstalled = log?.isInstalled(resource) ?? false
+            let installedVersion = log?.installedVersion(resource)
 
             switch resource.source {
-            case .github(let url, _), .forgejo(let url, _):
+            case .github, .forgejo:
+                let availableVersion = try? await assetService.fetchRepositoryRelease(for: resource).tagName
+                let updateAvailable: Bool = {
+                    if let installedVersion, let availableVersion, availableVersion.isHigherThan(installedVersion) {
+                        return true
+                    }
+
+                    return false
+                }()
+
                 displayingResources.append(
                     .init(
                         resource: resource,
-                        version: try? await assetService.fetchRepositoryRelease(for: url).tagName,
-                        preChecked: !(resource.uncheckedIfInstalled && isInstalled)
+                        version: availableVersion,
+                        preChecked: !isInstalled || (updateAvailable && !resource.uncheckedIfInstalled)
                     )
                 )
 
             case .link(_, let version):
+                let updateAvailable: Bool = {
+                    if let installedVersion, let version, installedVersion != version {
+                        return true
+                    }
+
+                    return false
+                }()
+
                 displayingResources.append(
                     .init(
                         resource: resource,
                         version: version,
-                        preChecked: !(resource.uncheckedIfInstalled && isInstalled)
+                        preChecked: !isInstalled || (updateAvailable && !resource.uncheckedIfInstalled)
                     )
                 )
             }
