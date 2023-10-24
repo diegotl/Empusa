@@ -20,7 +20,7 @@ struct MainView: View {
                 HStack {
                     Spacer()
 
-                    Button("Run") {
+                    Button("Download and install") {
                         model.execute()
                     }
                     .disabled(!model.canStartProcess)

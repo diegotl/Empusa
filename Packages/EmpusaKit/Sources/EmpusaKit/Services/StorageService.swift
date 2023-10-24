@@ -190,7 +190,9 @@ extension SwitchResource {
                 progressSubject: progressSubject
             )
 
-        case .atmosphere, .sigpatches, .tinfoil, .awooInstaller, .missionControl, .nxGallery:
+        case .atmosphere, .sigpatches, .tinfoil,
+             .awooInstaller, .tinwooInstaller, .missionControl,
+             .nxGallery, .nxOvlloader, .teslaMenu:
             fileManager.merge(
                 from: location,
                 to: destination,
@@ -215,6 +217,32 @@ extension SwitchResource {
             fileManager.moveFile(
                 at: location,
                 to: destination.appending(path: "switch"),
+                progressSubject: progressSubject
+            )
+
+        case .ovlSysmodules:
+            fileManager.moveFile(
+                at: location.appending(path: "ovlSysmodules.ovl"),
+                to: destination.appending(path: "switch").appending(path: ".overlays"),
+                progressSubject: progressSubject
+            )
+
+        case .sysClk:
+            fileManager.merge(
+                from: location.appending(path: "atmosphere"),
+                to: destination.appending(path: "atmosphere"),
+                progressSubject: progressSubject
+            )
+
+            fileManager.merge(
+                from: location.appending(path: "switch"),
+                to: destination.appending(path: "switch"),
+                progressSubject: progressSubject
+            )
+
+            fileManager.merge(
+                from: location.appending(path: "config"),
+                to: destination.appending(path: "config"),
                 progressSubject: progressSubject
             )
         }

@@ -66,9 +66,14 @@ public enum SwitchResource: String, Codable, CaseIterable {
     case nxShell
     case goldleaf
     case awooInstaller
+    case tinwooInstaller
     case missionControl
     case nxGallery
     case nxActivityLog
+    case nxOvlloader
+    case teslaMenu
+    case ovlSysmodules
+    case sysClk
 
     public var displayName: String {
         switch self {
@@ -88,9 +93,14 @@ public enum SwitchResource: String, Codable, CaseIterable {
         case .nxShell:              "NX-Shell"
         case .goldleaf:             "Goldleaf"
         case .awooInstaller:        "Awoo Installer"
+        case .tinwooInstaller:      "TinWoo Installer"
         case .missionControl:       "MissionControl"
         case .nxGallery:            "NXGallery"
         case .nxActivityLog:        "NX Activity Log"
+        case .nxOvlloader:          "nx-ovlloader"
+        case .teslaMenu:            "Tesla-Menu"
+        case .ovlSysmodules:        "ovlSysmodules"
+        case .sysClk:               "sys-clk"
         }
     }
 
@@ -188,6 +198,12 @@ public enum SwitchResource: String, Codable, CaseIterable {
                 repo: "Awoo-Installer",
                 assetPrefix: "Awoo-Installer.zip"
             )
+        case .tinwooInstaller:
+            .github(
+                owner: "hax4dazy",
+                repo: "TinWoo",
+                assetPrefix: "TinWoo-Installer.zip"
+            )
         case .missionControl:
             .github(
                 owner: "ndeadly",
@@ -205,6 +221,30 @@ public enum SwitchResource: String, Codable, CaseIterable {
                 owner: "tallbl0nde",
                 repo: "NX-Activity-Log",
                 assetPrefix: "NX-Activity-Log.nro"
+            )
+        case .nxOvlloader:
+            .github(
+                owner: "WerWolv",
+                repo: "nx-ovlloader",
+                assetPrefix: "nx-ovlloader.zip"
+            )
+        case .teslaMenu:
+            .github(
+                owner: "WerWolv",
+                repo: "Tesla-Menu",
+                assetPrefix: "ovlmenu.zip"
+            )
+        case .ovlSysmodules:
+            .github(
+                owner: "WerWolv",
+                repo: "ovl-sysmodules",
+                assetPrefix: "ovlSysmodules.ovl"
+            )
+        case .sysClk:
+            .github(
+                owner: "retronx-team",
+                repo: "sys-clk",
+                assetPrefix: "sys-clk-"
             )
         }
     }
@@ -227,9 +267,14 @@ public enum SwitchResource: String, Codable, CaseIterable {
         case .nxShell:              "NX-Shell.nro"
         case .goldleaf:             "Goldleaf.nro"
         case .awooInstaller:        "Awoo-Installer.zip"
+        case .tinwooInstaller:      "TinWoo-Installer.zip"
         case .missionControl:       "MissionControl.zip"
         case .nxGallery:            "NXGallery.zip"
         case .nxActivityLog:        "NX-Activity-Log.nro"
+        case .nxOvlloader:          "nx-ovlloader.zip"
+        case .teslaMenu:            "ovlmenu.zip"
+        case .ovlSysmodules:        "ovlSysmodules.ovl"
+        case .sysClk:               "sys-clk.zip"
         }
     }
 
@@ -246,7 +291,8 @@ public enum SwitchResource: String, Codable, CaseIterable {
         switch self {
         case .hekateIPL, .emummc, .lockpickRCM, .hbAppStore,
              .fusee, .jksv, .ftpd, .nxThemesInstaller,
-             .nxShell, .goldleaf, .nxActivityLog:
+             .nxShell, .goldleaf, .nxActivityLog,
+             .ovlSysmodules:
             false
         default:
             true

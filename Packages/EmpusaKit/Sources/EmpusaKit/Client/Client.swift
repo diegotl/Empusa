@@ -1,6 +1,10 @@
 import Foundation
 import Combine
 
+public enum ClientError: Error {
+    case rateLimitExceeded
+}
+
 protocol ClientProtocol {
     func request<T: Decodable>(
         url: URL
@@ -19,11 +23,25 @@ final class Client: NSObject, ClientProtocol {
             .shared
             .data(for: request)
 
-        return try JSONDecoder()
-            .decode(
-                T.self,
-                from: data
-            )
+        do {
+            let decodedResponse = try JSONDecoder()
+                .decode(
+                    T.self,
+                    from: data
+                )
+            return decodedResponse
+        } catch {
+            if let decodedErrorResponse = try? JSONDecoder()
+                .decode(
+                    GitHubErrorResponse.self,
+                    from: data
+                ),
+               decodedErrorResponse.message.contains("API rate limit exceeded") {
+                throw ClientError.rateLimitExceeded
+            }
+
+            throw error
+        }
     }
 
     func downloadFile(

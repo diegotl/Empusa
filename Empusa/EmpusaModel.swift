@@ -139,10 +139,24 @@ final class EmpusaModel: ObservableObject {
             loadResourcesVersions()
 
             if !result.failedResources.isEmpty {
-                alertData = .init(
-                    title: "Alert",
-                    message: "Failed to install \(result.failedResourceNames):\n\n\(result.failedResources.last!.error.localizedDescription)"
-                )
+                let rateLimitExceeded = result.failedResources.contains { failedResource in
+                    if case ClientError.rateLimitExceeded = failedResource.error {
+                        return true
+                    }
+                    return false
+                }
+
+                if rateLimitExceeded {
+                    alertData = .init(
+                        title: "Alert",
+                        message: "You've exceeded GitHub's rate limit. Connect to a VPN or wait few hours and try again. The resources that failed to install are: \(result.failedResourceNames)."
+                    )
+                } else {
+                    alertData = .init(
+                        title: "Alert",
+                        message: "Failed to install \(result.failedResourceNames):\n\n\(result.failedResources.last!.error.localizedDescription)"
+                    )
+                }
             } else {
                 alertData = .init(
                     title: "Success",
