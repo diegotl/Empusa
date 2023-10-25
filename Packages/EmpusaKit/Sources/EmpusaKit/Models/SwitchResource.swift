@@ -131,8 +131,8 @@ public enum SwitchResource: String, Codable, CaseIterable {
             )
         case .sigpatches:
             .link(
-                #URL("https://sigmapatches.coomer.party/sigpatches.zip"),
-                version: "16.1.0"
+                #URL("https://sigmapatches.coomer.party/sigpatches.zip?10.24.2023"),
+                version: "17.0.0"
             )
         case .tinfoil:
             .github(
