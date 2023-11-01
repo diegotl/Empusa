@@ -165,86 +165,39 @@ final public class StorageService: StorageServiceProtocol {
 
 // MARK: - SwitchResource extensions
 
-extension SwitchResource {
+extension ReleaseData {
     private var fileManager: FileManager {
         .default
     }
 
-    func handleAsset(
+    func install(
         at location: URL,
         destination: URL,
         progressSubject: CurrentValueSubject<Double, Never>
     ) throws {
-        switch self {
-        case .hekate, .bootLogos:
-            fileManager.merge(
-                from: location.appending(path: "bootloader"),
-                to: destination.appending(path: "bootloader"),
-                progressSubject: progressSubject
-            )
-        
-        case .emummc:
-            fileManager.moveFile(
-                at: location,
-                to: destination.appending(component: "atmosphere").appending(component: "hosts"),
-                progressSubject: progressSubject
-            )
+        for installStep in installSteps {
+            switch installStep.operation {
+            case .mergeAll:
+                fileManager.merge(
+                    from: location,
+                    to: destination,
+                    progressSubject: progressSubject
+                )
 
-        case .atmosphere, .sigpatches, .tinfoil,
-             .awooInstaller, .tinwooInstaller, .missionControl,
-             .nxGallery, .nxOvlloader, .teslaMenu:
-            fileManager.merge(
-                from: location,
-                to: destination,
-                progressSubject: progressSubject
-            )
+            case .moveFile:
+                fileManager.moveFile(
+                    at: location.appending(path: installStep.origin!),
+                    to: destination.appending(path: installStep.destination!),
+                    progressSubject: progressSubject
+                )
 
-        case .hekateIPL:
-            fileManager.moveFile(
-                at: location,
-                to: destination.appending(path: "bootloader"),
-                progressSubject: progressSubject
-            )
-
-        case .lockpickRCM, .fusee:
-            fileManager.moveFile(
-                at: location,
-                to: destination.appending(path: "bootloader").appending(path: "payloads"),
-                progressSubject: progressSubject
-            )
-
-        case .hbAppStore, .jksv, .ftpd, .nxThemesInstaller, .nxShell, .goldleaf, .nxActivityLog:
-            fileManager.moveFile(
-                at: location,
-                to: destination.appending(path: "switch"),
-                progressSubject: progressSubject
-            )
-
-        case .ovlSysmodules:
-            fileManager.moveFile(
-                at: location.appending(path: "ovlSysmodules.ovl"),
-                to: destination.appending(path: "switch").appending(path: ".overlays"),
-                progressSubject: progressSubject
-            )
-
-        case .sysClk:
-            fileManager.merge(
-                from: location.appending(path: "atmosphere"),
-                to: destination.appending(path: "atmosphere"),
-                progressSubject: progressSubject
-            )
-
-            fileManager.merge(
-                from: location.appending(path: "switch"),
-                to: destination.appending(path: "switch"),
-                progressSubject: progressSubject
-            )
-
-            fileManager.merge(
-                from: location.appending(path: "config"),
-                to: destination.appending(path: "config"),
-                progressSubject: progressSubject
-            )
+            case .mergeDir:
+                fileManager.merge(
+                    from: location.appending(path: installStep.origin!),
+                    to: destination.appending(path: installStep.destination!),
+                    progressSubject: progressSubject
+                )
+            }
         }
     }
 }

@@ -25,8 +25,8 @@ final class EmpusaModel: ObservableObject {
     @Published var selectedVolume: ExternalVolume = .none
 
     @Published var isLoadingResources: Bool = false
-    @Published var availableResources: [DisplayingSwitchResource] = []
-    @Published var selectedResources: [SwitchResource] = SwitchResource.allCases
+    @Published var availableResources: [ResourceData] = []
+    @Published var selectedResources: [ResourceData] = []
 
     @Published var isImporting: Bool = false
     @Published var isExporting: Bool = false
@@ -58,13 +58,12 @@ final class EmpusaModel: ObservableObject {
 
     var isAllSelected: Bool {
         get {
-            SwitchResource
-                .allCases
+            availableResources
                 .allSatisfy { selectedResources.contains($0) }
         } set {
             switch newValue {
             case true:
-                selectedResources = SwitchResource.allCases
+                selectedResources = availableResources
             case false:
                 selectedResources = []
             }
@@ -222,26 +221,36 @@ final class EmpusaModel: ObservableObject {
     func loadResourcesVersions() {
         Task { [weak self] in
             guard let self else { return }
-            self.isLoadingResources = true
+            isLoadingResources = true
 
-            self.availableResources = await resourceService
-                .fetchResources(
-                    for: self.selectedVolume
-                )
+            availableResources = try await resourceService
+                .fetchResources()
+                .flatMap { $0.resources }
 
-            self.selectedResources = availableResources
-                .filter{ $0.preChecked }
-                .map { $0.resource }
+            preSelect()
 
-            self.isLoadingResources = false
+            isLoadingResources = false
         }
     }
 
-    func selectAll() {
-        selectedResources = SwitchResource.allCases
-    }
-
-    func deselectAll() {
+    func preSelect() {
         selectedResources = []
+        guard let log = storageService.getLog(at: selectedVolume) else { return }
+
+        selectedResources = availableResources.filter { resource in
+            let release = if preferPreRelease {
+                resource.preRelease ?? resource.stableRelease
+            } else {
+                resource.stableRelease
+            }
+
+            guard
+                let installedVersion = log.installedVersion(resource),
+                let releaseVersion = release.version else {
+                return false
+            }
+
+            return releaseVersion.isHigherThan(installedVersion)
+        }
     }
 }

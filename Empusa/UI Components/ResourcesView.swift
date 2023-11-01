@@ -19,22 +19,28 @@ struct ResourcesView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
 
-                        ForEach(model.availableResources, id: \.self) { displayingResource in
+                        ForEach(model.availableResources, id: \.self) { resource in
                             Toggle(isOn: .init(get: {
-                                model.selectedResources.contains(displayingResource.resource)
+                                model.selectedResources.contains(resource)
                             }, set: { selected in
                                 if selected {
-                                    model.selectedResources.append(displayingResource.resource)
+                                    model.selectedResources.append(resource)
                                 } else {
-                                    guard let index = model.selectedResources.firstIndex(of: displayingResource.resource) else { return }
+                                    guard let index = model.selectedResources.firstIndex(of: resource) else { return }
                                     model.selectedResources.remove(at: index)
                                 }
                             })) {
                                 HStack {
-                                    Text(displayingResource.formattedName)
+                                    Text(resource.formattedName)
                                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                                    if let version = displayingResource.version {
+                                    if
+                                        model.preferPreRelease,
+                                        let preRelease = resource.preRelease,
+                                        let version = preRelease.version
+                                    {
+                                        Text(version)
+                                    } else if let version = resource.stableRelease.version {
                                         Text(version)
                                     }
                                 }

@@ -3,12 +3,12 @@ import Foundation
 import OSLog
 
 public struct FailedResource {
-    let resource: SwitchResource
+    let resource: ResourceData
     public let error: Error
 }
 
 public struct ProcessResult {
-    public var succeededResources: [SwitchResource] = []
+    public var succeededResources: [ResourceData] = []
     public var failedResources: [FailedResource] = []
 
     public var failedResourceNames: String {
@@ -19,12 +19,13 @@ public struct ProcessResult {
 }
 
 public protocol ContentManagerProtocol {
-    func download(resources: [SwitchResource], into volume: ExternalVolume, progressSubject: CurrentValueSubject<ProgressData?, Never>) async -> ProcessResult
+    func download(resources: [ResourceData], into volume: ExternalVolume, progressSubject: CurrentValueSubject<ProgressData?, Never>) async -> ProcessResult
     func backupVolume(at location: URL, progressSubject: CurrentValueSubject<ProgressData?, Never>) async throws -> ZipFile
     func restoreBackup(at location: URL, to destination: URL, progressSubject: CurrentValueSubject<ProgressData?, Never>) async throws
 }
 
 public final class ContentManager: ContentManagerProtocol {
+    private let userDefaultsService: UserDefaultsServiceProtocol = UserDefaultsService()
     private let storageService: StorageServiceProtocol = StorageService()
     private let githubService: AssetServiceProtocol = AssetService()
     private let logger: Logger = .init(subsystem: "nl.trevisa.diego.Empusa.EmpusaKit", category: "ContentManager")
@@ -32,10 +33,11 @@ public final class ContentManager: ContentManagerProtocol {
     public init() {}
 
     public func download(
-        resources: [SwitchResource],
+        resources: [ResourceData],
         into volume: ExternalVolume,
         progressSubject: CurrentValueSubject<ProgressData?, Never>
     ) async -> ProcessResult {
+        let preferPreReleaseVersions = userDefaultsService.boolForKey(.preferPreReleaseVersions)
         let totalProgress = Double(resources.count) * 3
         let log: EmpusaLog = storageService.getLog(at: volume) ?? .init()
         var result = ProcessResult()
@@ -60,11 +62,17 @@ public final class ContentManager: ContentManagerProtocol {
                         total: totalProgress
                     )
                 }.assign(to: \.value, on: progressSubject)
+
+                let releaseToDownload: ReleaseData = if preferPreReleaseVersions, let preRelease = resource.preRelease {
+                    preRelease
+                } else {
+                    resource.stableRelease
+                }
                 
                 // Download asset
-                progressTitleSubject.send("Downloading \(resource.assetFileName)...")
+                progressTitleSubject.send("Downloading \(releaseToDownload.assetFileName)...")
                 let asset = try await githubService.downloadAsset(
-                    for: resource,
+                    for: releaseToDownload,
                     progressSubject: downloadProgressSubject
                 )
                 
@@ -72,7 +80,7 @@ public final class ContentManager: ContentManagerProtocol {
                 let assetFileUrl = asset
                     .url
                     .deletingLastPathComponent()
-                    .appending(component: resource.assetFileName)
+                    .appending(component: releaseToDownload.assetFileName)
                 
                 try storageService.moveItem(
                     at: asset.url,
@@ -80,9 +88,9 @@ public final class ContentManager: ContentManagerProtocol {
                 )
                 
                 let extractedUrl = try {
-                    if resource.isAssetZipped {
+                    if releaseToDownload.fileType == "zip" {
                         // Unzip asset
-                        progressTitleSubject.send("Unzipping \(resource.assetFileName)...")
+                        progressTitleSubject.send("Unzipping \(releaseToDownload.assetFileName)...")
                         return try storageService.unzipFile(
                             at: assetFileUrl,
                             progressSubject: unzipProgressSubject
@@ -90,13 +98,13 @@ public final class ContentManager: ContentManagerProtocol {
                     } else {
                         // Do nothing
                         unzipProgressSubject.send(1)
-                        return assetFileUrl
+                        return assetFileUrl.deletingLastPathComponent()
                     }
                 }()
                 
                 // Copy asset to SD
-                progressTitleSubject.send("Copying contents of \(resource.assetFileName) into destination...")
-                try resource.handleAsset(
+                progressTitleSubject.send("Copying contents of \(releaseToDownload.assetFileName) into destination...")
+                try releaseToDownload.install(
                     at: extractedUrl,
                     destination: volume.url,
                     progressSubject: mergeProgressSubject

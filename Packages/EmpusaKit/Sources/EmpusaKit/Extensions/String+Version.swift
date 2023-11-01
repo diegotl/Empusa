@@ -1,6 +1,6 @@
 import Foundation
 
-extension String {
+public extension String {
     func isHigherThan(_ otherVersion: String) -> Bool {
         let versionDelimiter = "."
 
