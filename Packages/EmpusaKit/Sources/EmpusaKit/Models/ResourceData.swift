@@ -55,7 +55,7 @@ public struct ResourceData: Decodable, Equatable, Hashable {
     }
 }
 
-public struct CategoryData: Decodable {
+public struct CategoryData: Decodable, Hashable {
     public let name: String
     public let resources: [ResourceData]
 }

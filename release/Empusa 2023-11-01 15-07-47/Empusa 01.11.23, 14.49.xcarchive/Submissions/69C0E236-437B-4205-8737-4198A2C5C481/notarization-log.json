@@ -1,0 +1,169 @@
+{
+  "logFormatVersion": 1,
+  "jobId": "69c0e236-437b-4205-8737-4198a2c5c481",
+  "status": "Accepted",
+  "statusSummary": "Ready for distribution",
+  "statusCode": 0,
+  "archiveFilename": "Empusa.zip",
+  "uploadDate": "2023-11-01T13:51:50.995Z",
+  "sha256": "7f32dd6b8b295203e04c975353e70af683f0b4cfd445eb9763658bbca996190a",
+  "ticketContents": [
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/Autoupdate",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "5a50e57e574b64d0bd2020ab35acd8db1c5ba7b1",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/Autoupdate",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "e3a222001e7416bf467532e7940ee2a1bc2f72f9",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/Updater.app",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "522c7f983a0759143e5a00d0ac290607db1605e5",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/Updater.app",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "0934fde63d87a6809ff17f9c7aa996e17a5660a5",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "8238ddf5566f8b5d087ce1239cde7586e92dd0b8",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "393674e479326072a7667f292c7a76827080005f",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "0f4defdbf0135f4d1285c2778af4a84341069919",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "57075823c7a32e195c46ce2def5da1d97261f33f",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/XPCServices/Downloader.xpc",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "f679d27ede8ef9e11ad9caf98bbdff26085b9d84",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/XPCServices/Downloader.xpc",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "4df6ad80b444cd2d28f3507f93b8730ccdf62099",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/XPCServices/Installer.xpc",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "fbdfadfb65feb20d1039057eedebc2a07b5b5555",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/Current/XPCServices/Installer.xpc",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "5c87f4b7bd0a94ca1f04dbb043a1975d653c6280",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/MacOS/Empusa",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "0f4defdbf0135f4d1285c2778af4a84341069919",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/MacOS/Empusa",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "57075823c7a32e195c46ce2def5da1d97261f33f",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Autoupdate",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "5a50e57e574b64d0bd2020ab35acd8db1c5ba7b1",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Autoupdate",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "e3a222001e7416bf467532e7940ee2a1bc2f72f9",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Sparkle",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "8238ddf5566f8b5d087ce1239cde7586e92dd0b8",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Sparkle",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "393674e479326072a7667f292c7a76827080005f",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Updater.app",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "522c7f983a0759143e5a00d0ac290607db1605e5",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Updater.app",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "0934fde63d87a6809ff17f9c7aa996e17a5660a5",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Updater.app/Contents/MacOS/Updater",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "522c7f983a0759143e5a00d0ac290607db1605e5",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/Updater.app/Contents/MacOS/Updater",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "0934fde63d87a6809ff17f9c7aa996e17a5660a5",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/XPCServices/Downloader.xpc/Contents/MacOS/Downloader",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "f679d27ede8ef9e11ad9caf98bbdff26085b9d84",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/XPCServices/Downloader.xpc/Contents/MacOS/Downloader",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "4df6ad80b444cd2d28f3507f93b8730ccdf62099",
+      "arch": "arm64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/XPCServices/Installer.xpc/Contents/MacOS/Installer",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "fbdfadfb65feb20d1039057eedebc2a07b5b5555",
+      "arch": "x86_64"
+    },
+    {
+      "path": "Empusa.zip/Empusa.app/Contents/Frameworks/Sparkle.framework/Versions/B/XPCServices/Installer.xpc/Contents/MacOS/Installer",
+      "digestAlgorithm": "SHA-256",
+      "cdhash": "5c87f4b7bd0a94ca1f04dbb043a1975d653c6280",
+      "arch": "arm64"
+    }
+  ],
+  "issues": null
+}

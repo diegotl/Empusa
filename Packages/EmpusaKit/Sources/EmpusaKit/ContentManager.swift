@@ -20,8 +20,6 @@ public struct ProcessResult {
 
 public protocol ContentManagerProtocol {
     func download(resources: [ResourceData], into volume: ExternalVolume, progressSubject: CurrentValueSubject<ProgressData?, Never>) async -> ProcessResult
-    func backupVolume(at location: URL, progressSubject: CurrentValueSubject<ProgressData?, Never>) async throws -> ZipFile
-    func restoreBackup(at location: URL, to destination: URL, progressSubject: CurrentValueSubject<ProgressData?, Never>) async throws
 }
 
 public final class ContentManager: ContentManagerProtocol {
@@ -139,50 +137,5 @@ public final class ContentManager: ContentManagerProtocol {
         )
 
         return result
-    }
-
-    public func backupVolume(
-        at location: URL,
-        progressSubject: CurrentValueSubject<ProgressData?, Never>
-    ) async throws -> ZipFile {
-        let zipProgressSubject = CurrentValueSubject<Double, Never>(0)
-
-        let cancellable = zipProgressSubject.map { zipProgress in
-            ProgressData(
-                title: "Zipping volume contents...",
-                progress: zipProgress,
-                total: 1
-            )
-        }
-        .assign(to: \.value, on: progressSubject)
-
-        defer {
-            cancellable.cancel()
-        }
-
-        return try storageService.zipDirectory(at: location, progressSubject: zipProgressSubject)
-    }
-
-    public func restoreBackup(
-        at location: URL,
-        to destination: URL,
-        progressSubject: CurrentValueSubject<ProgressData?, Never>
-    ) async throws {
-        let unzipProgressSubject = CurrentValueSubject<Double, Never>(0)
-
-        let cancellable = unzipProgressSubject.map { zipProgress in
-            ProgressData(
-                title: "Restoring backup...",
-                progress: zipProgress,
-                total: 1
-            )
-        }
-        .assign(to: \.value, on: progressSubject)
-
-        defer {
-            cancellable.cancel()
-        }
-
-        try storageService.unzipFile(at: location, to: destination, progressSubject: unzipProgressSubject)
     }
 }

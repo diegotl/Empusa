@@ -25,12 +25,8 @@ final class EmpusaModel: ObservableObject {
     @Published var selectedVolume: ExternalVolume = .none
 
     @Published var isLoadingResources: Bool = false
-    @Published var availableResources: [ResourceData] = []
+    @Published var availableResources: [CategoryData] = []
     @Published var selectedResources: [ResourceData] = []
-
-    @Published var isImporting: Bool = false
-    @Published var isExporting: Bool = false
-    @Published var exportingFile: ZipFile?
 
     @Published var isProcessing: Bool = false
     @Published var progress: ProgressData?
@@ -53,38 +49,22 @@ final class EmpusaModel: ObservableObject {
     }
 
     var canStartProcess: Bool {
-        validVolumeSelected && !selectedResources.isEmpty && !isProcessing && !isExporting
+        validVolumeSelected && !selectedResources.isEmpty && !isProcessing
     }
 
     var isAllSelected: Bool {
         get {
             availableResources
+                .flatMap { $0.resources }
                 .allSatisfy { selectedResources.contains($0) }
         } set {
             switch newValue {
             case true:
                 selectedResources = availableResources
+                    .flatMap { $0.resources }
             case false:
                 selectedResources = []
             }
-        }
-    }
-
-    lazy var exportCompletion: ((Result<URL, Error>) -> Void) = { [weak self] result in
-        if let tempZipFilePath = self?.exportingFile?.url {
-            self?.storageService.removeItem(at: tempZipFilePath)
-        }
-
-        self?.exportingFile = nil
-        self?.isExporting = false
-    }
-
-    lazy var importCompletion: ((Result<URL, Error>) -> Void) = { [weak self] result in
-        switch result {
-        case .success(let zipUrl):
-            self?.restoreBackup(zipUrl: zipUrl)
-        case .failure(let error):
-            self?.alertData = .init(error: error)
         }
     }
 
@@ -102,17 +82,18 @@ final class EmpusaModel: ObservableObject {
 
     // MARK: - Public functions
     func loadExternalVolumes() {
-        do {
-            externalVolumes = try storageService.listExternalVolumes()
+        storageService
+            .externalVolumes
+            .map { [weak self] volumes in
+                guard let self else { return volumes }
 
-            if selectedVolume == .none || !externalVolumes.contains(selectedVolume) {
-                selectedVolume = externalVolumes.last ?? .none
+                if selectedVolume == .none || !volumes.contains(selectedVolume) {
+                    selectedVolume = volumes.last ?? .none
+                }
+
+                return volumes
             }
-        } catch {
-            logger.error("Failed to load external volumes: \(error.localizedDescription)")
-            selectedVolume = .none
-            alertData = .init(error: error)
-        }
+            .assign(to: &$externalVolumes)
     }
 
     func execute() {
@@ -165,56 +146,21 @@ final class EmpusaModel: ObservableObject {
         }
     }
 
-    func backup() {
+    func format() {
         guard validVolumeSelected else { return }
 
-        Task(priority: .background) { [weak self] in
-            guard let self else { return }
-            isProcessing = true
-
-            let progressSubject = CurrentValueSubject<ProgressData?, Never>(nil)
-            progressSubject
-                .receive(on: RunLoop.main)
-                .assign(to: &$progress)
-
-            let zipFile = try await contentManager.backupVolume(
-                at: selectedVolume.url,
-                progressSubject: progressSubject
-            )
-
-            isProcessing = false
-            exportingFile = zipFile
-            isExporting = true
-            self.progress = nil
-        }
-    }
-
-    func restoreBackup(zipUrl: URL) {
-        guard validVolumeSelected else { return }
-        isProcessing = true
-
-        Task(priority: .background) { [weak self] in
+        Task { [weak self] in
             guard let self else { return }
 
-            let progressSubject = CurrentValueSubject<ProgressData?, Never>(nil)
-            progressSubject
-                .receive(on: RunLoop.main)
-                .assign(to: &$progress)
-
-            try await contentManager
-                .restoreBackup(
-                    at: zipUrl,
-                    to: selectedVolume.url,
-                    progressSubject: progressSubject
+            do {
+                try await storageService.format(volume: selectedVolume)
+                alertData = .init(
+                    title: "Success",
+                    message: "Sucessfully formatted the selected volume"
                 )
-
-            isProcessing = false
-            self.progress = nil
-
-            self.alertData = .init(
-                title: "Success",
-                message: "Backup sucessfully restored to the selected destination."
-            )
+            } catch {
+                alertData = .init(error: error)
+            }
         }
     }
 
@@ -225,7 +171,6 @@ final class EmpusaModel: ObservableObject {
 
             availableResources = try await resourceService
                 .fetchResources()
-                .flatMap { $0.resources }
 
             preSelect()
 
@@ -237,20 +182,22 @@ final class EmpusaModel: ObservableObject {
         selectedResources = []
         guard let log = storageService.getLog(at: selectedVolume) else { return }
 
-        selectedResources = availableResources.filter { resource in
-            let release = if preferPreRelease {
-                resource.preRelease ?? resource.stableRelease
-            } else {
-                resource.stableRelease
-            }
+        selectedResources = availableResources
+            .flatMap { $0.resources }
+            .filter { resource in
+                let release = if preferPreRelease {
+                    resource.preRelease ?? resource.stableRelease
+                } else {
+                    resource.stableRelease
+                }
 
-            guard
-                let installedVersion = log.installedVersion(resource),
-                let releaseVersion = release.version else {
-                return false
-            }
+                guard
+                    let installedVersion = log.installedVersion(resource),
+                    let releaseVersion = release.version else {
+                    return false
+                }
 
-            return releaseVersion.isHigherThan(installedVersion)
-        }
+                return releaseVersion.isHigherThan(installedVersion)
+            }
     }
 }

@@ -9,7 +9,7 @@ struct MainView: View {
             HeaderView()
 
             HStack {
-                DestinationView(model: model)
+                ExternalVolumeView(model: model)
                 ResourcesView(model: model)
             }
             .padding()

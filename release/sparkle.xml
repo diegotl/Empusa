@@ -1,0 +1,30 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Empusa</title>
+        <item>
+            <title>1.0.5</title>
+            <pubDate>Wed, 25 Oct 2023 19:17:23 +0200</pubDate>
+            <sparkle:version>6</sparkle:version>
+            <sparkle:shortVersionString>1.0.5</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://empusa.pacotevicio.app/empusa-macos.zip" length="1672825" type="application/octet-stream" sparkle:edSignature="t5CLumVn9aNOLrVpKIrIK06oDECrnT0T//gQ9y4sePUguED6PDLaFqK9PxN9PTfwpDoRu3DFGP/53r7rzXMIDA=="/>
+        </item>
+        <item>
+            <title>1.0.4</title>
+            <pubDate>Tue, 24 Oct 2023 20:09:53 +0200</pubDate>
+            <sparkle:version>5</sparkle:version>
+            <sparkle:shortVersionString>1.0.5</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://empusa.pacotevicio.app/empusa-macos.zip" length="1672804" type="application/octet-stream" sparkle:edSignature="5qJX4lMYT3ghRxPVR4nRJSf58jv2t96NBWCDxr3i3SVaQ8apC6vpaanwQscfon8B6foCn64EvQ619AsJIQJ8Dg=="/>
+        </item>
+        <item>
+            <title>1.0.3</title>
+            <pubDate>Sat, 21 Oct 2023 12:12:00 +0200</pubDate>
+            <sparkle:version>4</sparkle:version>
+            <sparkle:shortVersionString>1.0.3</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://empusa.pacotevicio.app/empusa-macos.zip" length="1641512" type="application/octet-stream" sparkle:edSignature="6Quwx1t0rJVytk6sYmc/bFmqMFpOd919+ee2trG+VTat0N8Ki10F+0CIEi7+WfCrSpA6osn+DR8y4/vRRMNBDQ=="/>
+        </item>
+    </channel>
+</rss>

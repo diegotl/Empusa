@@ -15,7 +15,7 @@
 		3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */; };
 		3F21D3412ADD77E700B6A5D9 /* EmpusaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F21D3402ADD77E700B6A5D9 /* EmpusaKit */; };
 		3F28069C2AE8264700649951 /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F28069B2AE8264700649951 /* UIApplication+Version.swift */; };
-		3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176D2ADDE117000283AE /* DestinationView.swift */; };
+		3F3B176E2ADDE117000283AE /* ExternalVolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176D2ADDE117000283AE /* ExternalVolumeView.swift */; };
 		3F3B17702ADDE16A000283AE /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B176F2ADDE16A000283AE /* ResourcesView.swift */; };
 		3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B17712ADDE25D000283AE /* DataProgressView.swift */; };
 		3FCE9D2D2AE0944C00A4E3F5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 3FCE9D2C2AE0944C00A4E3F5 /* Sparkle */; };
@@ -45,7 +45,7 @@
 		3F21D33B2ADD442800B6A5D9 /* EmpusaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmpusaModel.swift; sourceTree = "<group>"; };
 		3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		3F28069B2AE8264700649951 /* UIApplication+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
-		3F3B176D2ADDE117000283AE /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
+		3F3B176D2ADDE117000283AE /* ExternalVolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalVolumeView.swift; sourceTree = "<group>"; };
 		3F3B176F2ADDE16A000283AE /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		3F3B17712ADDE25D000283AE /* DataProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProgressView.swift; sourceTree = "<group>"; };
 		3F54EB962AE2553D008A45B0 /* Empusa.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Empusa.xctestplan; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			children = (
 				3F21D30C2ADADC7300B6A5D9 /* MainView.swift */,
 				3F21D33E2ADD504900B6A5D9 /* HeaderView.swift */,
-				3F3B176D2ADDE117000283AE /* DestinationView.swift */,
+				3F3B176D2ADDE117000283AE /* ExternalVolumeView.swift */,
 				3F3B176F2ADDE16A000283AE /* ResourcesView.swift */,
 				3F3B17712ADDE25D000283AE /* DataProgressView.swift */,
 				3FCE9D302AE17F5F00A4E3F5 /* CheckForUpdatesView.swift */,
@@ -276,7 +276,7 @@
 				3FFEF7792AE456850084B365 /* SettingsView.swift in Sources */,
 				3F3B17722ADDE25D000283AE /* DataProgressView.swift in Sources */,
 				3F21D30B2ADADC7300B6A5D9 /* EmpusaApp.swift in Sources */,
-				3F3B176E2ADDE117000283AE /* DestinationView.swift in Sources */,
+				3F3B176E2ADDE117000283AE /* ExternalVolumeView.swift in Sources */,
 				3F28069C2AE8264700649951 /* UIApplication+Version.swift in Sources */,
 				3F21D33C2ADD442800B6A5D9 /* EmpusaModel.swift in Sources */,
 				3F21D33F2ADD504900B6A5D9 /* HeaderView.swift in Sources */,
